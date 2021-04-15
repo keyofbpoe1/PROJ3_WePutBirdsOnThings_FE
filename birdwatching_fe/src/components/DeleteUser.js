@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-export default class NewUser extends Component {
+export default class DeleteUser extends Component {
  constructor(props) {
    super(props)
    this.state = {
@@ -17,7 +17,7 @@ export default class NewUser extends Component {
 
  handleSubmit = async (event) => {
    event.preventDefault();
-   
+
    const url = this.props.baseURL + '/users';
 
     try{
