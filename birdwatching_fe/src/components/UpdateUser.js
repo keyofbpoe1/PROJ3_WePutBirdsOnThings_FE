@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-export default class NewUser extends Component {
+export default class UpdateUser extends Component {
  constructor(props) {
    super(props)
    this.state = {
@@ -8,7 +8,26 @@ export default class NewUser extends Component {
      password: '',
      email: '',
      pattern: '',
+     about: '',
+     user: this.props.currentUser,
    }
+ }
+
+ getUser = () => {
+   fetch(this.props.baseURL + '/users/' + this.state.user)
+     .then(data => {
+       return data.json()},
+       err => console.log(err))
+     .then(parsedData => this.setState({
+       username: parsedData.username,
+       email: parsedData.email,
+       about: parsedData.about,
+     }),
+      err=> console.log(err));
+ }
+
+ componentDidMount(){
+   this.getUser()
  }
 
  handleChange = (event) => {
@@ -17,16 +36,16 @@ export default class NewUser extends Component {
 
  handleSubmit = async (event) => {
    event.preventDefault();
-   
-   const url = this.props.baseURL + '/users';
+
+   const url = this.props.baseURL + '/users/' + this.state.user;
 
     try{
       const response = await fetch( url, {
-        method: 'POST',
+        method: 'PUT',
         body: JSON.stringify({
           username: this.state.username,
-          password: this.state.password,
           email: this.state.email,
+          about: this.state.about,
         }),
         headers: {
           'Content-Type' : 'application/json'
@@ -34,17 +53,8 @@ export default class NewUser extends Component {
       });
 
       if (response.status===200){
-        console.log('new user created');
-        //this.getHolidays();
-        // const updatedHoliday = await response.json()
-        // const findIndex = this.state.holidays.findIndex(holiday => holiday._id === id);
-        // const copyHolidays = [...this.state.holidays];
-        // copyHolidays[findIndex].likes = updatedHoliday.likes;
-        // this.setState({
-        //   holidays: copyHolidays,
-        // });
+        console.log('user updated');
       }
-
     }
     catch(err){
       console.log('Error => ', err);
@@ -54,20 +64,17 @@ export default class NewUser extends Component {
  render () {
     return (
       <form onSubmit={this.handleSubmit}>
-       <h3>Create a New Account</h3>
+       <h3>Update User Account</h3>
        <label htmlFor="username"></label>
-       <input type="text" id="username" name="username" onChange={this.handleChange} value1={this.state.username} placeholder="Enter a New Username" required/>
+       <input type="text" id="username" name="username" onChange={this.handleChange} value={this.state.username} placeholder="Enter a New Username" required pattern="^[a-zA-Z0-9]*$"/>
        <br/>
        <label htmlFor="email"></label>
-       <input type="email" id="email" name="email" onChange={this.handleChange} value1={this.state.email} placeholder="Enter Your Email Address" required/>
+       <input type="email" id="email" name="email" onChange={this.handleChange} value={this.state.email} placeholder="Enter Your Email Address" required/>
        <br/>
-       <label htmlFor="pattern"></label>
-       <input type="password" id="pattern" name="pattern" onChange={this.handleChange} value1={this.state.password} placeholder="Enter a New Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required/>
+       <label htmlFor="about"></label>
+       <textarea id="about" name="about" rows="4" cols="50" onChange={this.handleChange} value={this.state.about} placeholder="Tell us about yourself"></textarea>
        <br/>
-       <label htmlFor="password"></label>
-       <input type="password" id="password" name="password" onChange={this.handleChange} value1={this.state.password} placeholder="Confirm New Password" pattern={this.state.pattern} required/>
-       <br/>
-       <input type="submit" value="Create!"/><button type="button">Cancel</button>
+       <input type="submit" value="Update!"/><button type="button">Cancel</button>
      </form>
    );
   }

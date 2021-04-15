@@ -8,6 +8,7 @@ export default class NewUser extends Component {
      password: '',
      email: '',
      pattern: '',
+     about: '',
    }
  }
 
@@ -17,7 +18,7 @@ export default class NewUser extends Component {
 
  handleSubmit = async (event) => {
    event.preventDefault();
-   
+
    const url = this.props.baseURL + '/users';
 
     try{
@@ -27,6 +28,7 @@ export default class NewUser extends Component {
           username: this.state.username,
           password: this.state.password,
           email: this.state.email,
+          about: this.state.about,
         }),
         headers: {
           'Content-Type' : 'application/json'
@@ -56,10 +58,13 @@ export default class NewUser extends Component {
       <form onSubmit={this.handleSubmit}>
        <h3>Create a New Account</h3>
        <label htmlFor="username"></label>
-       <input type="text" id="username" name="username" onChange={this.handleChange} value1={this.state.username} placeholder="Enter a New Username" required/>
+       <input type="text" id="username" name="username" onChange={this.handleChange} value1={this.state.username} placeholder="Enter a New Username" required pattern="^[a-zA-Z0-9]*$"/>
        <br/>
        <label htmlFor="email"></label>
        <input type="email" id="email" name="email" onChange={this.handleChange} value1={this.state.email} placeholder="Enter Your Email Address" required/>
+       <br/>
+       <label htmlFor="about"></label>
+       <textarea id="about" name="about" rows="4" cols="50" onChange={this.handleChange} value1={this.state.about} placeholder="Tell us about yourself"></textarea>
        <br/>
        <label htmlFor="pattern"></label>
        <input type="password" id="pattern" name="pattern" onChange={this.handleChange} value1={this.state.password} placeholder="Enter a New Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required/>
