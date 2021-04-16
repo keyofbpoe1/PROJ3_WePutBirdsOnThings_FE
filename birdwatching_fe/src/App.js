@@ -7,8 +7,11 @@ import ShowUsers from './components/ShowUsers.js';
 import ShowSingleUser from './components/ShowSingleUser.js';
 import JournalShow from './components/JournalShow.js';
 import JournalEdit from './components/JournalEdit.js';
+<<<<<<< HEAD
+=======
 import JournalDelete from './components/JournalDelete.js';
 import NewImage from './components/NewImage.js';
+>>>>>>> userandsession
 let baseURL = '';
 
 if (process.env.NODE_ENV === 'development') {
