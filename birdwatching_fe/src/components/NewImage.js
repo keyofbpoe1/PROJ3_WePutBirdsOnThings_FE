@@ -14,24 +14,33 @@ export default class NewImage extends Component {
 
    uploadHandler = (event) => {
      const url = this.props.baseURL + '/upload';
-     const data = new FormData();
-     data.append('file', event.target.files[0]);
-     axios.post(url, data)
-       .then((res) => {
-         this.setState({ photos: [res.data, ...this.state.photos] });
-       });
+     console.log(event.target.files);
 
+     Array.from(event.target.files).forEach((file, i) => {
+       let data = new FormData();
+       data.append('file', file);
+       axios.post(url, data)
+         .then((res) => {
+           this.setState({ photos: [res.data, ...this.state.photos] });
+         });
+     });
 
+     // const data = new FormData();
+     // data.append('file', event.target.files[0]);
+     // axios.post(url, data)
+     //   .then((res) => {
+     //     this.setState({ photos: [res.data, ...this.state.photos] });
+     //   });
    }
 
    render() {
      return  (
        <div>
          <div>
-           <input type="file" name="file" onChange={this.uploadHandler}/>
+           <input type="file" name="file" onChange={this.uploadHandler} accept="image/*" multiple/>
          </div>
-         {this.state.photos.map(photo => (
-           <img src={`${this.props.baseURL}/${photo.filename}`} alt={photo.filename} />
+         {this.state.photos.map((photo, ind) => (
+           <img key={ind} src={`${this.props.baseURL}/${photo.filename}`} alt={photo.filename} />
          ))}
        </div>
      )
