@@ -7,6 +7,11 @@ import ShowUsers from './components/ShowUsers.js';
 import ShowSingleUser from './components/ShowSingleUser.js';
 import JournalShow from './components/JournalShow.js';
 import JournalEdit from './components/JournalEdit.js';
+<<<<<<< HEAD
+=======
+import JournalDelete from './components/JournalDelete.js';
+import NewImage from './components/NewImage.js';
+>>>>>>> userandsession
 let baseURL = '';
 
 if (process.env.NODE_ENV === 'development') {
@@ -36,8 +41,10 @@ export default class App extends Component {
         <JournalUser baseURL={baseURL} currentUser="60785e9f66836507fcba78cd"/>
         <ShowUsers baseURL={baseURL} />
         <ShowSingleUser baseURL={baseURL} currentUser="60785e9f66836507fcba78cd"/>
-        <JournalShow baseURL={baseURL} currentUser="60785e9f66836507fcba78cd" datestamp="2021-04-15T21:33:44.882Z"/>
-        <JournalEdit baseURL={baseURL} currentUser="60785e9f66836507fcba78cd" datestamp="2021-04-15T21:33:44.882Z"/>
+        <JournalShow baseURL={baseURL} currentUser="60785e9f66836507fcba78cd" datestamp="2021-04-16T21:48:32.993Z"/>
+        <JournalEdit baseURL={baseURL} currentUser="60785e9f66836507fcba78cd" datestamp="2021-04-16T21:48:32.993Z"/>
+        <JournalDelete baseURL={baseURL} currentUser="60785e9f66836507fcba78cd" datestamp="2021-04-16T17:27:43.788Z"/>
+        <NewImage baseURL={baseURL} />
       </>
    );
   }
