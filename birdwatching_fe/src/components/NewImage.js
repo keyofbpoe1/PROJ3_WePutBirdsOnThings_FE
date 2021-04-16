@@ -22,6 +22,7 @@ export default class NewImage extends Component {
        axios.post(url, data)
          .then((res) => {
            this.setState({ photos: [res.data, ...this.state.photos] });
+           console.log(this.state);
          });
      });
 

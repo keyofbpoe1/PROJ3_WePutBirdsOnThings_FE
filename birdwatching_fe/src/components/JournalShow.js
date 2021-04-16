@@ -11,6 +11,9 @@ export default class JournalShow extends Component {
      // about: '',
      // title: '',
      // notes: '',
+     title: '',
+     notes: '',
+     photos: [],
      user: this.props.currentUser,
      datestamp: this.props.datestamp,
    }
@@ -21,9 +24,15 @@ export default class JournalShow extends Component {
      .then(data => {
        return data.json()},
        err => console.log(err))
-     .then(parsedData => this.setState({
-       journal: parsedData.journal,
-     }),
+     .then(parsedData => {
+       let myJ = parsedData.journal.find(obj => {
+         return obj.datestamp === this.state.datestamp;
+       });
+       this.setState({
+         title: myJ.title,
+         notes: myJ.notes,
+         photos: myJ.photos,
+     })},
       err=> console.log(err));
  }
 
@@ -64,28 +73,45 @@ export default class JournalShow extends Component {
  render () {
    //get journal entry
    //let jEnt;
-   let jTit;
-   let jNote;
-   let jArr = this.state.journal;
-   if (jArr) {
-     let jEnt = jArr.find(obj => {
-       return obj.datestamp === this.state.datestamp;
-     });
-     if (jEnt) {
-       jTit = jEnt.title;
-       jNote = jEnt.notes;
-     }
-   }
+   // let jTit;
+   // let jNote;
+   // let jPhot;
+   // let jArr = this.state.journal;
+   // if (jArr) {
+   //   let jEnt = jArr.find(obj => {
+   //     return obj.datestamp === this.state.datestamp;
+   //   });
+   //   if (jEnt) {
+   //     jTit = jEnt.title;
+   //     jNote = jEnt.notes;
+   //     let jPhotArr = jEnt.photos;
+   //     if (jPhotArr) {
+   //       jPhot = jPhotArr.map((photo, ind) => (
+   //         return (
+   //           <img key={ind} src={`${this.props.baseURL}/${photo}`} alt={photo} />
+   //         );
+   //
+   //       ));
+   //     }
+   //   }
+   // }
     return (
       <>
         <h3>Journal Entry</h3>
         <table>
          <tbody>
           <tr>
-            <td>{jTit}</td>
+            <td>{this.state.title}</td>
           </tr>
           <tr>
-            <td>{jNote}</td>
+            <td>{this.state.notes}</td>
+          </tr>
+          <tr>
+            <td>
+              {this.state.photos.map((photo, ind) => (
+                <img key={ind} src={`${this.props.baseURL}/${photo}`} alt={photo} />
+              ))}
+            </td>
           </tr>
          </tbody>
         </table>
