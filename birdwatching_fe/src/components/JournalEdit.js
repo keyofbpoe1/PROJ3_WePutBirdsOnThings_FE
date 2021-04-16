@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-export default class JournalShow extends Component {
+export default class JournalEdit extends Component {
  constructor(props) {
    super(props)
    this.state = {

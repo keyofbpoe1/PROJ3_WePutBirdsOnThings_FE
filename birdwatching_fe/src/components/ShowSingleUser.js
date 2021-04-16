@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import BirdSeen from '../components/BirdSeen.js';
 
 export default class ShowSingleUser extends Component {
  constructor(props) {
@@ -72,8 +73,22 @@ export default class ShowSingleUser extends Component {
    let bArr = this.state.birdlist;
    if (bArr) {
      bList = bArr.map((bird, ind) => {
+       let bs = "Searching For";
+       if (bird.seen) {
+         bs = "Seen!"
+       }
        return (
-          <li key={ind}>{bird.birdname}</li>
+          <li key={ind}>
+            {bird.birdname}
+            <br/>
+            {bs}
+            <br/>
+            {(bird.seen)
+              ? <></>
+              : <BirdSeen baseURL={this.props.baseURL} currentUser={this.state.user} birdname={bird.birdname} />
+            }
+
+          </li>
        )
      });
    }

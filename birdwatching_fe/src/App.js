@@ -7,6 +7,7 @@ import ShowUsers from './components/ShowUsers.js';
 import ShowSingleUser from './components/ShowSingleUser.js';
 import JournalShow from './components/JournalShow.js';
 import JournalEdit from './components/JournalEdit.js';
+import JournalDelete from './components/JournalDelete.js';
 let baseURL = '';
 
 if (process.env.NODE_ENV === 'development') {
@@ -38,6 +39,7 @@ export default class App extends Component {
         <ShowSingleUser baseURL={baseURL} currentUser="60785e9f66836507fcba78cd"/>
         <JournalShow baseURL={baseURL} currentUser="60785e9f66836507fcba78cd" datestamp="2021-04-15T21:33:44.882Z"/>
         <JournalEdit baseURL={baseURL} currentUser="60785e9f66836507fcba78cd" datestamp="2021-04-15T21:33:44.882Z"/>
+        <JournalDelete baseURL={baseURL} currentUser="60785e9f66836507fcba78cd" datestamp="2021-04-16T17:27:43.788Z"/>
       </>
    );
   }
