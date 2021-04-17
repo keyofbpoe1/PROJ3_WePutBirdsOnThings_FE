@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Button } from 'semantic-ui-react'
 
 export default class JournalDelete extends Component {
   constructor(props) {
@@ -11,37 +12,37 @@ export default class JournalDelete extends Component {
       // about: '',
       // title: '',
       // notes: '',
-      user: this.props.currentUser,
+      currentUser: this.props.currentUser,
       datestamp: this.props.datestamp,
     }
   }
 
-  getJournal = () => {
-    fetch(this.props.baseURL + '/users/' + this.state.user)
-      .then(data => {
-        return data.json()},
-        err => console.log(err))
-      .then(parsedData => this.setState({
-        journal: parsedData.journal,
-      }),
-       err=> console.log(err));
-  }
-
-  componentDidMount(){
-    this.getJournal()
-  }
+  // getJournal = () => {
+  //   fetch(this.props.baseURL + '/users/' + this.state.user)
+  //     .then(data => {
+  //       return data.json()},
+  //       err => console.log(err))
+  //     .then(parsedData => this.setState({
+  //       journal: parsedData.journal,
+  //     }),
+  //      err=> console.log(err));
+  // }
+  //
+  // componentDidMount(){
+  //   this.getJournal()
+  // }
 
   // handleChange = (event) => {
   //    this.setState({ [event.currentTarget.id]: event.currentTarget.value});
   //  }
   //
-  handleSubmit = async (event) => {
-    event.preventDefault();
+  handleJDelete = async () => {
+    //event.preventDefault();
 
     let confPopup = window.confirm('Are you sure you would like to dlete this journal entry?');
 
     if (confPopup) {
-      const url = this.props.baseURL + '/users/' + this.state.user + '/journal';
+      const url = this.props.baseURL + '/users/' + this.state.currentUser + '/journal';
 
        try{
          const response = await fetch( url, {
@@ -57,6 +58,7 @@ export default class JournalDelete extends Component {
 
          if (response.status===200){
            console.log('journal deleted');
+           this.props.remJournal(this.props.remInd);
          }
        }
        catch(err){
@@ -68,37 +70,28 @@ export default class JournalDelete extends Component {
   render () {
     //get journal entry
     //let jEnt;
-    let jTit;
-    let jNote;
-    let jArr = this.state.journal;
-    if (jArr) {
-      let jEnt = jArr.find(obj => {
-        return obj.datestamp === this.state.datestamp;
-      });
-      if (jEnt) {
-        jTit = jEnt.title;
-        jNote = jEnt.notes;
-      }
-    }
+    // let jTit;
+    // let jNote;
+    // let jArr = this.state.journal;
+    // if (jArr) {
+    //   let jEnt = jArr.find(obj => {
+    //     return obj.datestamp === this.state.datestamp;
+    //   });
+    //   if (jEnt) {
+    //     jTit = jEnt.title;
+    //     jNote = jEnt.notes;
+    //   }
+    // }
      return (
       <>
-       <h3>Delete Journal Entry</h3>
-       <form onSubmit={this.handleSubmit}>
-         <h3>Journal Entry</h3>
-         <table>
-          <tbody>
-           <tr>
-             <td>{jTit}</td>
-           </tr>
-           <tr>
-             <td>{jNote}</td>
-           </tr>
-           <tr>
-             <td><input type="submit" value="Delete Entry!"/></td>
-           </tr>
-          </tbody>
-         </table>
-       </form>
+
+      <Button onClick={() => {
+        this.handleJDelete();
+       }}>
+        &#128465;
+      </Button>
+
+
       </>
     );
    }

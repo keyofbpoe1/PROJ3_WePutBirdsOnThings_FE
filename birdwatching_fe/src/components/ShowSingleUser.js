@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import BirdSeen from '../components/BirdSeen.js';
 import UpdateUser from '../components/UpdateUser.js';
 import JournalUser from '../components/JournalUser.js';
+import JournalDelete from '../components/JournalDelete.js';
 
 export default class ShowSingleUser extends Component {
  constructor(props) {
@@ -75,6 +76,12 @@ export default class ShowSingleUser extends Component {
    this.setState({ journal: jCopy});
  }
 
+ remJournal = (remInd) => {
+   let jCopy = this.state.journal;
+   jCopy.splice(remInd, 1);
+   this.setState({ journal: jCopy});
+ }
+
  render () {
    console.log(this.state);
    console.log(this.state.birdlist);
@@ -109,7 +116,7 @@ export default class ShowSingleUser extends Component {
    if (jArr) {
      jList = jArr.map((journ, ind) => {
        return (
-          <li key={ind}>{journ.title}</li>
+          <li key={ind}><a>{journ.title}</a><JournalDelete currentUser={this.state.currentUser} datestamp={journ.datestamp} remJournal={this.remJournal} remInd={ind} baseURL={this.props.baseURL} /></li>
        )
      });
    }
