@@ -16,6 +16,7 @@ export default class JournalUser extends Component {
      currentUser: this.props.currentUser,
      photos: [],
      setOpen: false,
+     datestamp: '',
    }
  }
 
@@ -46,10 +47,13 @@ export default class JournalUser extends Component {
    const url = this.props.baseURL + '/users/' + this.state.currentUser + '/journal';
    console.log(url);
    let photos = [];
+   let d = new Date();
+   let n = d.toISOString();
+   this.setState({ datestamp: n});
 
-   this.state.photos.map((photo, ind) => (
-     photos.push(photo.filename)
-   ));
+   // this.state.photos.map((photo, ind) => (
+   //   photos.push(photo.filename)
+   // ));
 
     try{
       const response = await fetch( url, {
@@ -57,7 +61,9 @@ export default class JournalUser extends Component {
         body: JSON.stringify({
           notes: this.state.notes,
           title: this.state.title,
-          photos: photos,
+          photos: this.state.photos,
+          datestamp: n,
+          type: 'new',
         }),
         headers: {
           'Content-Type' : 'application/json'
@@ -65,11 +71,12 @@ export default class JournalUser extends Component {
       });
 
       if (response.status===200){
-        console.log('journal updated');
+        console.log(response);
         this.props.journalUpdate({
           notes: this.state.notes,
           title: this.state.title,
-          photos: photos,
+          photos: this.state.photos,
+          datestamp: n,
         });
       }
     }

@@ -49,7 +49,7 @@ export default class JournalDelete extends Component {
            method: 'PUT',
            body: JSON.stringify({
              datestamp: this.state.datestamp,
-             delete: true,
+             type: 'delete',
            }),
            headers: {
              'Content-Type' : 'application/json'

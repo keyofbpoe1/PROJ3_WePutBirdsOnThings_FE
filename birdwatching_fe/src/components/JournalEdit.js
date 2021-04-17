@@ -58,6 +58,7 @@ export default class JournalEdit extends Component {
           notes: this.state.notes,
           title: this.state.title,
           photos: this.state.photos,
+          type: 'update',
         }),
         headers: {
           'Content-Type' : 'application/json'
