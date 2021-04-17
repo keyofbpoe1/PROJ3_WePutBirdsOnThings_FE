@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import BirdSeen from '../components/BirdSeen.js';
 import UpdateUser from '../components/UpdateUser.js';
+import JournalUser from '../components/JournalUser.js';
 
 export default class ShowSingleUser extends Component {
  constructor(props) {
@@ -66,6 +67,12 @@ export default class ShowSingleUser extends Component {
     catch(err){
       console.log('Error => ', err);
     }
+ }
+
+ journalUpdate = (newEnt) => {
+   let jCopy = this.state.journal;
+   jCopy.push(newEnt);
+   this.setState({ journal: jCopy});
  }
 
  render () {
@@ -138,6 +145,7 @@ export default class ShowSingleUser extends Component {
                 <ul>
                   {jList}
                 </ul>
+                <JournalUser currentUser={this.state.currentUser} baseURL={this.props.baseURL} journalUpdate={this.journalUpdate} />
               </td>
             </tr>
             <tr>
