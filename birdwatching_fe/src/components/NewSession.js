@@ -18,7 +18,6 @@ export default class NewSession extends Component {
     event.preventDefault();
 
     const url = this.props.baseURL + '/sessions';
-    console.log(url);
 
     let data = {
       username: this.state.username,
@@ -27,8 +26,11 @@ export default class NewSession extends Component {
 
     Axios.post(url, data)
       .then((res) => {
-        console.log(res)
-        //this.setState({ photos: [res.data.filename, ...this.state.photos] });
+        console.log(res);
+        if (res.status===200){
+          this.props.appLogin(true, res.data.currentUser);
+          //console.log(res.data.currentUser);
+        }
       });
   }
 

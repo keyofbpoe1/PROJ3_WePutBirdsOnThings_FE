@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import BirdSeen from '../components/BirdSeen.js';
+import UpdateUser from '../components/UpdateUser.js';
 
 export default class ShowSingleUser extends Component {
  constructor(props) {
@@ -8,14 +9,16 @@ export default class ShowSingleUser extends Component {
      username: '',
      password: '',
      email: '',
-     pattern: '',
+     //pattern: '',
      about: '',
-     user: this.props.currentUser,
+     birdlist: '',
+     journal: '',
+     currentUser: this.props.currentUser,
    }
  }
 
  getUser = () => {
-   fetch(this.props.baseURL + '/users/' + this.state.user)
+   fetch(this.props.baseURL + '/users/' + this.state.currentUser)
      .then(data => {
        return data.json()},
        err => console.log(err))
@@ -33,36 +36,37 @@ export default class ShowSingleUser extends Component {
    this.getUser()
  }
 
- // handleChange = (event) => {
- //    this.setState({ [event.currentTarget.id]: event.currentTarget.value});
- //  }
- //
- // handleSubmit = async (event) => {
- //   event.preventDefault();
- //
- //   const url = this.props.baseURL + '/users/' + this.state.user;
- //
- //    try{
- //      const response = await fetch( url, {
- //        method: 'PUT',
- //        body: JSON.stringify({
- //          username: this.state.username,
- //          email: this.state.email,
- //          about: this.state.about,
- //        }),
- //        headers: {
- //          'Content-Type' : 'application/json'
- //        },
- //      });
- //
- //      if (response.status===200){
- //        console.log('user updated');
- //      }
- //    }
- //    catch(err){
- //      console.log('Error => ', err);
- //    }
- // }
+ userUpdate = async (un, em, ab) => {
+   //event.preventDefault();
+
+   const url = this.props.baseURL + '/users/' + this.state.currentUser;
+
+    try{
+      const response = await fetch( url, {
+        method: 'PUT',
+        body: JSON.stringify({
+          username: un,
+          email: em,
+          about: ab,
+        }),
+        headers: {
+          'Content-Type' : 'application/json'
+        },
+      });
+
+      if (response.status===200){
+        console.log('user updated');
+        this.setState({
+          username: un,
+          email: em,
+          about: ab,
+        });
+      }
+    }
+    catch(err){
+      console.log('Error => ', err);
+    }
+ }
 
  render () {
    console.log(this.state);
@@ -85,7 +89,7 @@ export default class ShowSingleUser extends Component {
             <br/>
             {(bird.seen)
               ? <></>
-              : <BirdSeen baseURL={this.props.baseURL} currentUser={this.state.user} birdname={bird.birdname} />
+              : <BirdSeen baseURL={this.props.baseURL} currentUser={this.state.currentUser} birdname={bird.birdname} />
             }
 
           </li>
@@ -134,6 +138,11 @@ export default class ShowSingleUser extends Component {
                 <ul>
                   {jList}
                 </ul>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <UpdateUser baseURL={this.props.baseURL} currentUser={this.state.currentUser} userUpdate={this.userUpdate} />
               </td>
             </tr>
           </tbody>

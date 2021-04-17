@@ -24,6 +24,7 @@ export default class KillSession extends Component {
 
        if (response.status===200){
          console.log(response);
+         this.props.appLogin(false, null);
          //console.log('new user created');
        }
 
@@ -32,24 +33,6 @@ export default class KillSession extends Component {
        console.log('Error => ', err);
      }
   }
-
-  // handleLogin = async (event) => {
-  //   event.preventDefault();
-  //
-  //   const url = this.props.baseURL + '/sessions';
-  //   console.log(url);
-  //
-  //   let data = {
-  //     username: this.state.username,
-  //     password: this.state.password,
-  //   }
-  //
-  //   Axios.delete(url, data)
-  //     .then((res) => {
-  //       console.log(res)
-  //       //this.setState({ photos: [res.data.filename, ...this.state.photos] });
-  //     });
-  // }
 
   render () {
      return (
