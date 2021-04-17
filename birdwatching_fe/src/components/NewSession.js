@@ -40,17 +40,30 @@ export default class NewSession extends Component {
     event.preventDefault();
 
     const url = this.props.baseURL + '/login';
+    console.log(url);
 
-    Axios({
-      method: "POST",
-      data: {
-        username: this.state.username,
-        password: this.state.password,
-      },
-      withCredentials: true,
-      //url: "http://localhost:4000/login",
-      url: url,
-    }).then((res) => console.log(res));
+    let data = {
+      username: this.state.username,
+      password: this.state.password,
+    }
+
+    Axios.post(url, data)
+      .then((res) => {
+        console.log(res)
+        //this.setState({ photos: [res.data.filename, ...this.state.photos] });
+      });
+
+  //   Axios({
+  //     method: "POST",
+  //     data: {
+  //       username: this.state.username,
+  //       password: this.state.password,
+  //     },
+  //     withCredentials: true,
+  //     //url: "http://localhost:4000/login",
+  //     url: url,
+  //   }).then((res) => console.log(res));
+  // }
   }
 
   render () {
