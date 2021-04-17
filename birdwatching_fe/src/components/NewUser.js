@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Axios from "axios";
 
 export default class NewUser extends Component {
  constructor(props) {
@@ -37,14 +38,23 @@ export default class NewUser extends Component {
 
       if (response.status===200){
         console.log('new user created');
-        //this.getHolidays();
-        // const updatedHoliday = await response.json()
-        // const findIndex = this.state.holidays.findIndex(holiday => holiday._id === id);
-        // const copyHolidays = [...this.state.holidays];
-        // copyHolidays[findIndex].likes = updatedHoliday.likes;
-        // this.setState({
-        //   holidays: copyHolidays,
-        // });
+
+        //then login the user
+        const lUrl = this.props.baseURL + '/sessions';
+
+        let data = {
+          username: this.state.username,
+          password: this.state.password,
+        }
+
+        Axios.post(lUrl, data)
+          .then((res) => {
+            console.log(res);
+            if (res.status===200){
+              this.props.appLogin(true, res.data.currentUser);
+              //console.log(res.data.currentUser);
+            }
+          });
       }
 
     }

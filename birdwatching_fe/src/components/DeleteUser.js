@@ -31,6 +31,27 @@ export default class DeleteUser extends Component {
 
         if (response.status===200){
           console.log('user deleted');
+
+          //then logout
+          const lUrl = this.props.baseURL + '/Sessions/logout';
+
+           try{
+             const response = await fetch( lUrl, {
+               method: 'GET',
+               headers: {
+                 'Content-Type' : 'application/json'
+               },
+             });
+
+             if (response.status===200){
+               console.log(response);
+               this.props.appLogin(false, null);
+             }
+
+           }
+           catch(err){
+             console.log('Error => ', err);
+           }
         }
 
       }

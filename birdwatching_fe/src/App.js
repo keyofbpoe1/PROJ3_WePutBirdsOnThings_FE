@@ -49,12 +49,13 @@ export default class App extends Component {
           ?
             <>
             <KillSession baseURL={baseURL} appLogin={this.appLogin} />
+            <DeleteUser baseURL={baseURL} currentUser={this.state.currentUser} appLogin={this.appLogin} />
             <ShowSingleUser baseURL={baseURL} currentUser={this.state.currentUser} />
             </>
           :
             <>
             <NewSession baseURL={baseURL} appLogin={this.appLogin} />
-            <NewUser baseURL={baseURL} />
+            <NewUser baseURL={baseURL} appLogin={this.appLogin} />
             </>
         }
 
