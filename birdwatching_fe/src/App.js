@@ -9,6 +9,7 @@ import JournalShow from './components/JournalShow.js';
 import JournalEdit from './components/JournalEdit.js';
 import JournalDelete from './components/JournalDelete.js';
 import NewImage from './components/NewImage.js';
+import NewSession from './components/NewSession.js';
 let baseURL = '';
 
 if (process.env.NODE_ENV === 'development') {
@@ -42,6 +43,7 @@ export default class App extends Component {
         <JournalEdit baseURL={baseURL} currentUser="60785e9f66836507fcba78cd" datestamp="2021-04-16T21:48:32.993Z"/>
         <JournalDelete baseURL={baseURL} currentUser="60785e9f66836507fcba78cd" datestamp="2021-04-16T17:27:43.788Z"/>
         <NewImage baseURL={baseURL} />
+        <NewSession baseURL={baseURL} />
       </>
    );
   }
