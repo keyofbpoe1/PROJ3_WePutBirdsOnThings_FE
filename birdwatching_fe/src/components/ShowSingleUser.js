@@ -3,6 +3,7 @@ import BirdSeen from '../components/BirdSeen.js';
 import UpdateUser from '../components/UpdateUser.js';
 import JournalShow from '../components/JournalShow.js';
 import JournalUser from '../components/JournalUser.js';
+import JournalEdit from '../components/JournalEdit.js';
 import JournalDelete from '../components/JournalDelete.js';
 
 export default class ShowSingleUser extends Component {
@@ -84,6 +85,12 @@ export default class ShowSingleUser extends Component {
    this.setState({ journal: jCopy});
  }
 
+ editJournal = (eInd, uEnt) => {
+   let jCopy = this.state.journal;
+   jCopy.splice(eInd, 1, uEnt);
+   this.setState({ journal: jCopy});
+ }
+
  render () {
    console.log(this.state);
    console.log(this.state.birdlist);
@@ -120,6 +127,7 @@ export default class ShowSingleUser extends Component {
        return (
           <li key={ind}>
             <JournalShow currentUser={this.state.currentUser} datestamp={journ.datestamp} baseURL={this.props.baseURL} jEnt={journ} />
+            <JournalEdit currentUser={this.state.currentUser} datestamp={journ.datestamp} baseURL={this.props.baseURL} jEnt={journ} editJournal={this.editJournal} eInd={ind} />
             <JournalDelete currentUser={this.state.currentUser} datestamp={journ.datestamp} remJournal={this.remJournal} remInd={ind} baseURL={this.props.baseURL} />
           </li>
        )

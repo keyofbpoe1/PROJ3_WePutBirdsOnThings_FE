@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Button, Header, Image, Modal } from 'semantic-ui-react'
 import axios from 'axios';
 
 export default class JournalEdit extends Component {
@@ -45,34 +46,72 @@ export default class JournalEdit extends Component {
     this.setState({ [event.currentTarget.id]: event.currentTarget.value});
   }
 
- handleSubmit = async (event) => {
-   event.preventDefault();
+  handleJEdit = async () => {
+  //  event.preventDefault();
 
-   const url = this.props.baseURL + '/users/' + this.state.user + '/journal';
+    const url = this.props.baseURL + '/users/' + this.state.user + '/journal';
 
-    try{
-      const response = await fetch( url, {
-        method: 'PUT',
-        body: JSON.stringify({
-          datestamp: this.state.datestamp,
-          notes: this.state.notes,
-          title: this.state.title,
-          photos: this.state.photos,
-          type: 'update',
-        }),
-        headers: {
-          'Content-Type' : 'application/json'
-        },
-      });
+     try{
+       const response = await fetch( url, {
+         method: 'PUT',
+         body: JSON.stringify({
+           datestamp: this.state.datestamp,
+           notes: this.state.notes,
+           title: this.state.title,
+           photos: this.state.photos,
+           type: 'update',
+         }),
+         headers: {
+           'Content-Type' : 'application/json'
+         },
+       });
 
-      if (response.status===200){
-        console.log('journal updated');
-      }
-    }
-    catch(err){
-      console.log('Error => ', err);
-    }
- }
+       if (response.status===200){
+         console.log('journal updated');
+         this.props.editJournal(
+           this.props.eInd,
+           {
+             datestamp: this.state.datestamp,
+             notes: this.state.notes,
+             title: this.state.title,
+             photos: this.state.photos,
+           }
+         );
+       }
+     }
+     catch(err){
+       console.log('Error => ', err);
+     }
+  }
+
+ // handleSubmit = async (event) => {
+ //   event.preventDefault();
+ //
+ //   const url = this.props.baseURL + '/users/' + this.state.user + '/journal';
+ //
+ //    try{
+ //      const response = await fetch( url, {
+ //        method: 'PUT',
+ //        body: JSON.stringify({
+ //          datestamp: this.state.datestamp,
+ //          notes: this.state.notes,
+ //          title: this.state.title,
+ //          photos: this.state.photos,
+ //          type: 'update',
+ //        }),
+ //        headers: {
+ //          'Content-Type' : 'application/json'
+ //        },
+ //      });
+ //
+ //      if (response.status===200){
+ //        console.log('journal updated');
+ //      }
+ //    }
+ //    catch(err){
+ //      console.log('Error => ', err);
+ //    }
+ // }
 
  uploadHandler = (event) => {
    const url = this.props.baseURL + '/upload';
@@ -99,31 +138,54 @@ export default class JournalEdit extends Component {
    console.log(this.state);
 
     return (
-      <form onSubmit={this.handleSubmit}>
-         <h3>Edit Journal Entry</h3>
-         <label htmlFor="title"></label>
-         <input type="text" id="title" name="title" onChange={this.handleChange} value={this.state.title} placeholder="Entry Title" required />
-         <br/>
-         <label htmlFor="notes"></label>
-         <textarea id="notes" name="notes" rows="4" cols="50" onChange={this.handleChange} value={this.state.notes} placeholder="Enter a note!"></textarea>
-         <br/>
+      <>
+      <Modal
+       onClose={() => this.setState({ setOpen: false }) }
+       onOpen={() => this.setState({ setOpen: true }) }
+       open={this.state.setOpen}
+       trigger={<Button>&#128393;</Button>}
+     >
+       <Modal.Header>Edit Journal Entry</Modal.Header>
+       <Modal.Content image>
+         <Modal.Description>
 
-         <div>
-          <h4>Images</h4>
+           <label htmlFor="title"></label>
+           <input type="text" id="title" name="title" onChange={this.handleChange} value={this.state.title} placeholder="Entry Title" required />
+           <br/>
+           <label htmlFor="notes"></label>
+           <textarea id="notes" name="notes" rows="4" cols="50" onChange={this.handleChange} value={this.state.notes} placeholder="Enter a note!"></textarea>
+           <br/>
+
            <div>
-             <input type="file" name="file" onChange={this.uploadHandler} accept="image/*" multiple/>
+            <h4>Images</h4>
+             <div>
+               <input type="file" name="file" onChange={this.uploadHandler} accept="image/*" multiple/>
+             </div>
+             {this.state.photos.map((photo, ind) => (
+               <>
+                 <img key={ind} src={`${this.props.baseURL}/${photo}`} alt={photo} />
+                 <button key={photo} data-img={photo} type="button" onClick={this.remImg}>Remove</button>
+               </>
+             ))}
+
            </div>
-           {this.state.photos.map((photo, ind) => (
-             <>
-               <img key={ind} src={`${this.props.baseURL}/${photo}`} alt={photo} />
-               <button key={photo} data-img={photo} type="button" onClick={this.remImg}>Remove</button>
-             </>
-           ))}
 
-         </div>
+         </Modal.Description>
+       </Modal.Content>
+       <Modal.Actions>
+         <Button color='green' onClick={() => {
+           this.handleJEdit();
+           this.setState({ setOpen: false });
+          }}>
+           Save
+         </Button>
+         <Button color='black' onClick={() => this.setState({ setOpen: false }) }>
+           Close
+         </Button>
+       </Modal.Actions>
+     </Modal>
 
-         <input type="submit" value="Update Entry!"/><button type="button">Cancel</button>
-      </form>
+      </>
    );
   }
 }
