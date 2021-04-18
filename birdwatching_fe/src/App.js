@@ -11,9 +11,12 @@ export default class App extends Component {
    super(props)
 
    this.state = {
-    areaCode: 'VA',
+    areaCode: '',
     baseUrl: 'https://api.ebird.org/v2/data/obs/US-',
-    recent: '/recent?maxResults=1'
+    recent: '/recent?maxResults=100',
+    birdName: '',
+    birds:[],
+    birdlist: ''
       
    }
   }  
@@ -28,6 +31,7 @@ export default class App extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault()
+    console.log(this.state.birdName)
     this.getBird()
   }
 
@@ -43,17 +47,33 @@ export default class App extends Component {
     }
   }).then(res => {
     console.log(res.data)
-    this.setState({birds: res.data})
+    let regFilter = new RegExp(this.state.birdName, 'gmi')
+    let birds = res.data.filter((obj) =>{
+      return obj.comName.match(regFilter) //=== this.state.birdName
+    })
+    this.setState({birds: birds})
   })
 
-  
+
+
+    // name => name === this.state.birdName
   }
-  handleSubmit() {
-    // search the birdlist bird.comName
-  }
- 
+  // filterBirds = () => {
+  // let filterBirds;
+  // let copyList;
+  // copyList = this.state.birds
+  //   filterBirds = copyList.filter((obj) =>{
+  //     return obj.comName === this.state.birdName
+  //   })
+  //   this.setState({
+  //     birds: filterBirds
+  //   })
+  // }
+
+
 
   render () {
+    
     let birdlist;
     this.state.birds &&
     (birdlist = this.state.birds.map((bird, id) => { 
@@ -67,6 +87,12 @@ export default class App extends Component {
             </ul>
     
         </div>
+    
+    
+
+    
+      
+
 
       )}
       ))
@@ -76,16 +102,23 @@ export default class App extends Component {
         <form onSubmit={this.handleSubmit}>
         <label htmlFor='areaCode'>Area Code</label>
         <select onChange={this.handleChange} value={this.state.areaCode} id="areaCode" name="Area Code">
+          <option value=""></option>
           <option value='VA'>VA</option>
           <option value='NY'>NY</option>
         </select>
-       
+        <input
+          id="birdName"
+          type="text"
+          value={this.state.birdName}
+          onChange={this.handleChange}
+        ></input>
         <input 
           type='submit' 
-          value='Find Birds with Area Code'>
+          value='Find Birds within Area Code'>
         </input>
       </form>
       {birdlist}
+      
       </div>
     );
   }
