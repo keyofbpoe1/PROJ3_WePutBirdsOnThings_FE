@@ -18,6 +18,7 @@ export default class JournalUser extends Component {
      photos: [],
      setOpen: false,
      datestamp: '',
+     pBirds: [],
    }
  }
 
@@ -136,7 +137,7 @@ export default class JournalUser extends Component {
      >
        <Modal.Header>Add New Journal Entry</Modal.Header>
        <Modal.Content image>
-         <BirdAPI userURL={this.props.baseURL} currentUser={this.state.currentUser} jent={this.state.datestamp} />
+         <BirdAPI userURL={this.props.baseURL} currentUser={this.state.currentUser} jent={this.state.datestamp} pBirds={this.state.pBirds} />
          <Modal.Description>
            <Header>New Journal Entry</Header>
 

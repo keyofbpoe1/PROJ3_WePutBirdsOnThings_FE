@@ -19,7 +19,7 @@ export default class BirdAPI extends Component {
     birdlist: '',
     currentUser: this.props.currentUser,
     jent: this.props.jent,
-    pBirds: [],
+    pBirds: this.props.pBirds,
     //seen: false,
     //curbird: {},
    }

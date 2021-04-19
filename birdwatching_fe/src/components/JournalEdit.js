@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import BirdAPI from '../components/BirdAPI.js';
 import { Button, Header, Image, Modal } from 'semantic-ui-react'
 import axios from 'axios';
 
@@ -16,17 +17,25 @@ export default class JournalEdit extends Component {
      photos: [],
      //newPhotos: [],
      //journal: {},
-     user: this.props.currentUser,
+     currentUser: this.props.currentUser,
      datestamp: this.props.datestamp,
+     birdlist: [],
+     pBirds: [],
    }
  }
 
  getJournal = () => {
-   fetch(this.props.baseURL + '/users/' + this.state.user)
+   fetch(this.props.baseURL + '/users/' + this.state.currentUser)
      .then(data => {
        return data.json()},
        err => console.log(err))
      .then(parsedData => {
+       let myBirds = parsedData.birdlist.filter(obj => {
+         return obj.jent === this.state.datestamp;
+       })
+       .map(obj => {
+          return obj.birdname;
+        });;
        let myJ = parsedData.journal.find(obj => {
          return obj.datestamp === this.state.datestamp;
        });
@@ -34,6 +43,7 @@ export default class JournalEdit extends Component {
          title: myJ.title,
          notes: myJ.notes,
          photos: myJ.photos,
+         pBirds: myBirds,
      })},
       err=> console.log(err));
  }
@@ -49,7 +59,7 @@ export default class JournalEdit extends Component {
   handleJEdit = async () => {
   //  event.preventDefault();
 
-    const url = this.props.baseURL + '/users/' + this.state.user + '/journal';
+    const url = this.props.baseURL + '/users/' + this.state.currentUser + '/journal';
 
      try{
        const response = await fetch( url, {
@@ -147,6 +157,7 @@ export default class JournalEdit extends Component {
      >
        <Modal.Header>Edit Journal Entry</Modal.Header>
        <Modal.Content image>
+        <BirdAPI userURL={this.props.baseURL} currentUser={this.state.currentUser} jent={this.state.datestamp} pBirds={this.state.pBirds} />
          <Modal.Description>
 
            <label htmlFor="title"></label>
