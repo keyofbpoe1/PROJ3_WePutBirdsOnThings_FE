@@ -11,6 +11,7 @@ import JournalDelete from './components/JournalDelete.js';
 import NewImage from './components/NewImage.js';
 import NewSession from './components/NewSession.js';
 import KillSession from './components/KillSession.js';
+import BirdAPI from './components/BirdAPI.js';
 let baseURL = '';
 
 if (process.env.NODE_ENV === 'development') {
@@ -55,6 +56,7 @@ export default class App extends Component {
     return (
       <>
         Hello
+        <BirdAPI currentUser={this.state.currentUser} />
         {(this.state.userLoggedIn)
           ?
             <>
