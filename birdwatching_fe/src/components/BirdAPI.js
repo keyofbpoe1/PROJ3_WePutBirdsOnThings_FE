@@ -19,6 +19,7 @@ export default class BirdAPI extends Component {
     birdlist: '',
     currentUser: this.props.currentUser,
     jent: this.props.jent,
+    pBirds: [],
     //seen: false,
     //curbird: {},
    }
@@ -95,16 +96,63 @@ export default class BirdAPI extends Component {
 
        if (response.status===200){
          console.log('bird pinned');
-         // this.setState({
-         //   username: un,
-         //   email: em,
-         //   about: ab,
-         // });
+         let pbCopy = this.state.pBirds;
+         pbCopy.push(JSON.parse(event.target.dataset.curbird));
+         this.setState({
+           pBirds: pbCopy,
+         });
+         // document.getElementById(event.target.id).setAttribute('style', 'display: none;');
+         // document.getElementById(event.target.dataset.sibbut).setAttribute('style', 'display: block;');
        }
      }
      catch(err){
        console.log('Error => ', err);
      }
+  }
+
+  remBird = async (event) => {
+    const url = this.props.userURL + '/users/' + this.state.currentUser + '/unpin';
+    let bObj = JSON.parse(event.target.dataset.curbird);
+
+     try{
+       const response = await fetch( url, {
+         method: 'PUT',
+         body: JSON.stringify({
+           birdname: bObj,
+           seen: true,
+           jent: this.state.jent,
+         }),
+         headers: {
+           'Content-Type' : 'application/json'
+         },
+       });
+
+       if (response.status===200){
+         console.log('bird unpinned');
+         let pbCopy = this.state.pBirds;
+         let bInd = pbCopy.findIndex(obj => {
+            return (obj.subId === bObj.subId);
+          });
+
+          //if item found
+          if (bInd >= 0) {
+            //remove from array
+            pbCopy.splice(bInd, 1);
+          }
+
+         this.setState({
+           pBirds: pbCopy,
+         });
+         // document.getElementById(event.target.id).setAttribute('style', 'display: none;');
+         // document.getElementById(event.target.dataset.sibbut).setAttribute('style', 'display: block;');
+       }
+     }
+     catch(err){
+       console.log('Error => ', err);
+     }
+
+     // document.getElementById(event.target.id).setAttribute('style', 'display: none;');
+     // document.getElementById(event.target.dataset.sibbut).setAttribute('style', 'display: block;');
   }
 
   render () {
@@ -115,7 +163,8 @@ export default class BirdAPI extends Component {
       let pinBut;
       if (this.state.currentUser.length > 1) {
         //return (
-          pinBut = <Button type="button" data-curbird={JSON.stringify(bird)} onClick={this.pinBird}>Pin</Button>
+          pinBut = <Button id={'pinBut' + bird.subId} data-sibbut={'remBut' + bird.subId} type="button" data-curbird={JSON.stringify(bird)} onClick={this.pinBird}>Pin</Button>;
+        //  remBut = <Button id={'remBut' + bird.subId} data-sibbut={'pinBut' + bird.subId} type="button" data-curbird={JSON.stringify(bird)} onClick={this.remBird} style={{display: 'none'}}>Unpin</Button>;
         //)
       }
       return (
@@ -131,14 +180,32 @@ export default class BirdAPI extends Component {
 
         </div>
 
-
-
-
-
-
-
       )}
       ))
+
+      let pbirdlist;
+      this.state.pBirds &&
+      (pbirdlist = this.state.pBirds.map((bird, id) => {
+        let remBut;
+        if (this.state.currentUser.length > 1) {
+          //return (
+          //  pinBut = <Button id={'pinBut' + bird.subId} data-sibbut={'remBut' + bird.subId} type="button" data-curbird={JSON.stringify(bird)} onClick={this.pinBird}>Pin</Button>;
+            remBut = <Button id={'remBut' + bird.subId} data-sibbut={'pinBut' + bird.subId} type="button" data-curbird={JSON.stringify(bird)} onClick={this.remBird}>Unpin</Button>;
+          //)
+        }
+        return (
+          <div key={id}>
+
+              <h4>{bird.comName}</h4>
+              {remBut}
+
+
+          </div>
+
+        )}
+      ))
+
+
     return (
       <div className="App">
 
@@ -161,6 +228,7 @@ export default class BirdAPI extends Component {
         </input>
       </form>
       {birdlist}
+      {pbirdlist}
 
       </div>
     );
