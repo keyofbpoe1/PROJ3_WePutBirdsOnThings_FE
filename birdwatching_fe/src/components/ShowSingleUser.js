@@ -98,27 +98,27 @@ export default class ShowSingleUser extends Component {
 
    let bList;
    let bArr = this.state.birdlist;
-   if (bArr) {
-     bList = bArr.map((bird, ind) => {
-       let bs = "Searching For";
-       if (bird.seen) {
-         bs = "Seen!"
-       }
-       return (
-          <li key={ind}>
-            {bird.birdname}
-            <br/>
-            {bs}
-            <br/>
-            {(bird.seen)
-              ? <></>
-              : <BirdSeen baseURL={this.props.baseURL} currentUser={this.state.currentUser} birdname={bird.birdname} />
-            }
-
-          </li>
-       )
-     });
-   }
+   // if (bArr) {
+   //   bList = bArr.map((bird, ind) => {
+   //     let bs = "Searching For";
+   //     if (bird.seen) {
+   //       bs = "Seen!"
+   //     }
+   //     return (
+   //        <li key={ind}>
+   //          {bird.birdname}
+   //          <br/>
+   //          {bs}
+   //          <br/>
+   //          {(bird.seen)
+   //            ? <></>
+   //            : <BirdSeen baseURL={this.props.baseURL} currentUser={this.state.currentUser} birdname={bird.birdname} />
+   //          }
+   //
+   //        </li>
+   //     )
+   //   });
+   // }
 
    let jList;
    let jArr = this.state.journal;
@@ -151,14 +151,14 @@ export default class ShowSingleUser extends Component {
             <tr>
               <td>{this.state.about}</td>
             </tr>
-            <tr>
+            {/*<tr>
               <td>
                 Pinned Birds:
                 <ul>
                   {bList}
                 </ul>
               </td>
-            </tr>
+            </tr>*/}
             <tr>
               <td>
                 Journal Entries:

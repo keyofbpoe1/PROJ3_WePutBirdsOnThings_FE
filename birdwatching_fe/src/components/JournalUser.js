@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import BirdAPI from '../components/BirdAPI.js';
 import { Button, Header, Image, Modal } from 'semantic-ui-react'
 import axios from 'axios';
 
@@ -47,9 +48,9 @@ export default class JournalUser extends Component {
    const url = this.props.baseURL + '/users/' + this.state.currentUser + '/journal';
    console.log(url);
    let photos = [];
-   let d = new Date();
-   let n = d.toISOString();
-   this.setState({ datestamp: n});
+   // let d = new Date();
+   // let n = d.toISOString();
+   // this.setState({ datestamp: n});
 
    // this.state.photos.map((photo, ind) => (
    //   photos.push(photo.filename)
@@ -62,7 +63,7 @@ export default class JournalUser extends Component {
           notes: this.state.notes,
           title: this.state.title,
           photos: this.state.photos,
-          datestamp: n,
+          datestamp: this.state.datestamp,
           type: 'new',
         }),
         headers: {
@@ -76,7 +77,7 @@ export default class JournalUser extends Component {
           notes: this.state.notes,
           title: this.state.title,
           photos: this.state.photos,
-          datestamp: n,
+          datestamp: this.state.datestamp,
         });
       }
     }
@@ -106,18 +107,36 @@ export default class JournalUser extends Component {
    this.setState({ photos: copyStPhoto });
  }
 
+ openJournal = () => {
+   let d = new Date();
+   let n = d.toISOString();
+   // this.setState({
+   //   datestamp: n,
+   // }, () => {
+   //   this.setState({
+   //     setOpen: true,
+   //   });
+   // });
+   this.setState({
+     datestamp: n,
+     setOpen: true,
+   });
+ }
+
  render () {
     return (
       <>
 
       <Modal
        onClose={() => this.setState({ setOpen: false }) }
-       onOpen={() => this.setState({ setOpen: true }) }
+       //onOpen={() => this.setState({ setOpen: true }) }
+       onOpen={() => this.openJournal() }
        open={this.state.setOpen}
        trigger={<Button>Add New Entry</Button>}
      >
        <Modal.Header>Add New Journal Entry</Modal.Header>
        <Modal.Content image>
+         <BirdAPI userURL={this.props.baseURL} currentUser={this.state.currentUser} jent={this.state.datestamp} />
          <Modal.Description>
            <Header>New Journal Entry</Header>
 

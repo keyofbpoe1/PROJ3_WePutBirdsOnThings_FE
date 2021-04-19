@@ -56,7 +56,7 @@ export default class App extends Component {
     return (
       <>
         Hello
-        <BirdAPI currentUser={this.state.currentUser} />
+        <BirdAPI userURL={baseURL} currentUser='' jent='' />
         {(this.state.userLoggedIn)
           ?
             <>

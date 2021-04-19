@@ -15,14 +15,36 @@ export default class JournalShow extends Component {
      // title: this.props.jEnt.title,
      // notes: this.props.jEnt.notes,
      // photos: this.props.jEnt.photos,
-     // currentUser: this.props.currentUser,
-     // datestamp: this.props.datestamp,
+     currentUser: this.props.currentUser,
+     datestamp: this.props.datestamp,
      setOpen: false,
+     birdlist: [],
    }
  }
 
+ getBirds = () => {
+   let bArr = [];
+   fetch(this.props.baseURL + '/users/' + this.state.currentUser)
+     .then(data => {
+       return data.json()},
+       err => console.log(err))
+     .then(parsedData => {
+       let myBirds = parsedData.birdlist.filter(obj => {
+         return obj.jent === this.state.datestamp;
+       });
+       this.setState({
+         birdlist: myBirds,
+     })},
+      err=> console.log(err));
+ }
+
+ componentDidMount(){
+   this.getBirds();
+    //console.log(this.state);
+ }
+
  render () {
-   console.log(this.props.jEnt);
+   console.log(this.state);
     return (
       <>
 
@@ -34,6 +56,12 @@ export default class JournalShow extends Component {
      >
        <Modal.Header>{this.props.jEnt.title}</Modal.Header>
        <Modal.Content image>
+       {this.state.birdlist.map((bird, ind) => (
+           <li key={ind}>
+            {bird.birdname.comName}
+           </li>
+         ))}
+
          <Modal.Description>
 
            <table>

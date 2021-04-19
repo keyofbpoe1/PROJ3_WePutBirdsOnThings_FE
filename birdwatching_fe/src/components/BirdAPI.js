@@ -18,7 +18,9 @@ export default class BirdAPI extends Component {
     birds:[],
     birdlist: '',
     currentUser: this.props.currentUser,
-
+    jent: this.props.jent,
+    //seen: false,
+    //curbird: {},
    }
   }
 
@@ -71,7 +73,39 @@ export default class BirdAPI extends Component {
   //   })
   // }
 
+  pinBird = async (event) => {
+    //window.alert(event.target.dataset.birdname);
+    console.log(event.target.dataset.curbird);
+    console.log(this.state.jent);
 
+    const url = this.props.userURL + '/users/' + this.state.currentUser + '/pin';
+
+     try{
+       const response = await fetch( url, {
+         method: 'PUT',
+         body: JSON.stringify({
+           birdname: JSON.parse(event.target.dataset.curbird),
+           seen: true,
+           jent: this.state.jent,
+         }),
+         headers: {
+           'Content-Type' : 'application/json'
+         },
+       });
+
+       if (response.status===200){
+         console.log('bird pinned');
+         // this.setState({
+         //   username: un,
+         //   email: em,
+         //   about: ab,
+         // });
+       }
+     }
+     catch(err){
+       console.log('Error => ', err);
+     }
+  }
 
   render () {
 
@@ -81,7 +115,7 @@ export default class BirdAPI extends Component {
       let pinBut;
       if (this.state.currentUser.length > 1) {
         //return (
-          pinBut = <Button type="button">Pin</Button>
+          pinBut = <Button type="button" data-curbird={JSON.stringify(bird)} onClick={this.pinBird}>Pin</Button>
         //)
       }
       return (
