@@ -24,7 +24,9 @@ export default class KillSession extends Component {
 
        if (response.status===200){
          console.log(response);
-         this.props.appLogin(false, null);
+         sessionStorage.clear();
+         this.props.appLogin();
+         //this.props.appLogin(false, null);
          //console.log('new user created');
        }
 

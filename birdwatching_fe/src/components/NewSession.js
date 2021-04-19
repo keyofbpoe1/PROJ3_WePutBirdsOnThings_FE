@@ -28,7 +28,9 @@ export default class NewSession extends Component {
       .then((res) => {
         console.log(res);
         if (res.status===200){
-          this.props.appLogin(true, res.data.currentUser);
+          sessionStorage.setItem("userLoggedIn", true);
+          sessionStorage.setItem("currentUser", res.data.currentUser);
+          this.props.appLogin();
           //console.log(res.data.currentUser);
         }
       });

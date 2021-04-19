@@ -33,12 +33,22 @@ export default class App extends Component {
    }
  }
 
- appLogin = (uli, un) => {
+ appLogin = () => {
+   let uli = false;
+   let un = '';
+   if (sessionStorage.getItem("userLoggedIn") && sessionStorage.getItem("currentUser")) {
+     uli = sessionStorage.getItem("userLoggedIn");
+     un = sessionStorage.getItem("currentUser");
+   }
    this.setState({
      userLoggedIn: uli,
      currentUser: un,
    });
    console.log(this.state);
+ }
+
+ componentDidMount(){
+   this.appLogin()
  }
 
  render () {
