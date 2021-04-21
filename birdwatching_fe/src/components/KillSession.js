@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Button } from 'semantic-ui-react'
 //import Axios from "axios";
 
 export default class KillSession extends Component {
@@ -9,8 +10,8 @@ export default class KillSession extends Component {
     }
   }
 
-  handleLogout = async (event) => {
-    event.preventDefault();
+  handleLogout = async () => {
+    //event.preventDefault();
 
     const url = this.props.baseURL + '/Sessions/logout';
 
@@ -38,10 +39,9 @@ export default class KillSession extends Component {
 
   render () {
      return (
-       <form onSubmit={this.handleLogout}>
-        <h3>Logout</h3>
-        <input type="submit" value="Logout!"/><button type="button">Cancel</button>
-      </form>
+       <Button color='green' onClick={() => {
+         this.handleLogout();
+        }}>Sign Out</Button>
     );
    }
 }

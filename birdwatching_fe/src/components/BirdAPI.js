@@ -1,5 +1,5 @@
 import React, { Component} from 'react'
-import { Button, Header, Image, Modal } from 'semantic-ui-react'
+import { Button, Header, Image, Modal, Input, Select } from 'semantic-ui-react'
 import axios from 'axios'
 // import BirdData from './components/BirdData'
 // sd1dnat8ktfu
@@ -205,27 +205,28 @@ export default class BirdAPI extends Component {
         )}
       ))
 
+      const stOpts = [
+        {key: 'DC', value: 'DC', text: 'DC'},
+        {key: 'VA', value: 'VA', text: 'VA'},
+        {key: 'MD', value: 'MD', text: 'MD'},
+      ];
 
     return (
       <div className="App">
-
         <form onSubmit={this.handleSubmit}>
-        <label htmlFor='areaCode'>Area Code</label>
-        <select onChange={this.handleChange} value={this.state.areaCode} id="areaCode" name="Area Code">
-          <option value=""></option>
-          <option value='VA'>VA</option>
-          <option value='NY'>NY</option>
-        </select>
-        <input
+        <label htmlFor='areaCode'></label>
+        <Select onChange={this.handleChange} placeholder="State" value={this.state.areaCode} id="areaCode" name="Area Code" options={stOpts} style={{ width:"100px;" }}  />
+        <Input
           id="birdName"
           type="text"
           value={this.state.birdName}
           onChange={this.handleChange}
-        ></input>
-        <input
+          placeholder="Search..."
+        ></Input>
+        <Input
           type='submit'
-          value='Find Birds within Area Code'>
-        </input>
+          value='&#128269;'>
+        </Input>
       </form>
       {birdlist}
       {pbirdlist}

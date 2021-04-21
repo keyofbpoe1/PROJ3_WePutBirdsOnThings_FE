@@ -15,6 +15,16 @@ import BirdAPI from './components/BirdAPI.js';
 import BirdsHeader from './components/BirdsHeader.js'
 import BirdsNav from './components/BirdsNav.js'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import {
+  Menu,
+  Image
+
+} from 'semantic-ui-react'
+
+import{
+  Nav, NavLink, Bars, NavMenu, NavBtn, NavBtnLink
+} from './components/NavBarElements'
+
 let baseURL = '';
 
 if (process.env.NODE_ENV === 'development') {
@@ -47,8 +57,10 @@ export default class App extends Component {
    this.setState({
      userLoggedIn: uli,
      currentUser: un,
+   },
+   () => {
+     console.log(this.state);
    });
-   console.log(this.state);
  }
 
  componentDidMount(){
@@ -60,11 +72,41 @@ export default class App extends Component {
       <>
       <div className="App">
         <Router>
-          <BirdsNav/>
+          <Nav>
+            <NavLink to ="/">
+              <Image src={'birdlogo.png'} size={'tiny'}/>
+            </NavLink>
+            <Bars/>
+            <NavMenu>
+              <NavLink to="/" activeStyle> Home</NavLink>
+            </NavMenu>
+            <NavMenu>
+              <NavLink to="/about" activeStyle> About</NavLink>
+            </NavMenu>
+            <NavMenu>
+              <NavLink to="/contactus" activeStyle> Contact Us</NavLink>
+            </NavMenu>
+            <NavMenu>
+              <NavLink to="/signup" activeStyle> Sign Up</NavLink>
+            </NavMenu>
+            <NavBtn>
+              {(this.state.userLoggedIn)
+                ?
+                  <>
+                  <KillSession baseURL={baseURL} appLogin={this.appLogin} />
+                  </>
+                :
+                  <>
+                  <NewSession baseURL={baseURL} appLogin={this.appLogin} />
+                  </>
+              }
+            </NavBtn>
+
+          </Nav>
+          {/*<BirdsNav baseURL={baseURL} appLogin={this.appLogin} currentUser={this.state.currentUser} userLoggedIn={this.state.userLoggedIn} />*/}
         </Router>
-        <BirdsHeader name={'Max, Kaushik, and Stephen'}/>
+        <BirdsHeader baseURL={baseURL} name={'Max, Kaushik, and Stephen'}/>
       </div>
-        <BirdAPI userURL={baseURL} currentUser='' jent='' />
         {(this.state.userLoggedIn)
           ?
             <>
@@ -74,7 +116,7 @@ export default class App extends Component {
             </>
           :
             <>
-            <NewSession baseURL={baseURL} appLogin={this.appLogin} />
+
             <NewUser baseURL={baseURL} appLogin={this.appLogin} />
             </>
         }
