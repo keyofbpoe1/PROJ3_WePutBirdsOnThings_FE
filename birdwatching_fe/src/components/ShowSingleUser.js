@@ -5,6 +5,7 @@ import JournalShow from '../components/JournalShow.js';
 import JournalUser from '../components/JournalUser.js';
 import JournalEdit from '../components/JournalEdit.js';
 import JournalDelete from '../components/JournalDelete.js';
+import DeleteUser from '../components/DeleteUser.js';
 
 export default class ShowSingleUser extends Component {
  constructor(props) {
@@ -18,6 +19,7 @@ export default class ShowSingleUser extends Component {
      birdlist: '',
      journal: '',
      currentUser: this.props.currentUser,
+     appLogin: this.props.appLogin,
    }
  }
 
@@ -171,6 +173,7 @@ export default class ShowSingleUser extends Component {
             <tr>
               <td>
                 <UpdateUser baseURL={this.props.baseURL} currentUser={this.state.currentUser} userUpdate={this.userUpdate} />
+                <DeleteUser baseURL={this.props.baseURL} currentUser={this.state.currentUser} appLogin={this.state.appLogin} />
               </td>
             </tr>
           </tbody>

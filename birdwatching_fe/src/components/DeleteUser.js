@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Button } from 'semantic-ui-react'
 
 export default class DeleteUser extends Component {
   constructor(props) {
@@ -13,8 +14,8 @@ export default class DeleteUser extends Component {
     }
   }
 
- handleSubmit = async (event) => {
-   event.preventDefault();
+ deleteUserAccount = async () => {
+   //event.preventDefault();
 
    let confDelete = window.confirm("Are you sure you want to delete your account?");
 
@@ -45,7 +46,8 @@ export default class DeleteUser extends Component {
 
              if (response.status===200){
                console.log(response);
-               this.props.appLogin(false, null);
+               sessionStorage.clear();
+               this.props.appLogin();
              }
 
            }
@@ -63,10 +65,7 @@ export default class DeleteUser extends Component {
 
  render () {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <h3>Delete User Account</h3>
-        <input type="submit" value="Delete Account"/><button type="button">Cancel</button>
-     </form>
+      <Button onClick={this.deleteUserAccount}>Delete Account</Button>
    );
   }
 }

@@ -40,6 +40,7 @@ export default class App extends Component {
    this.state = {
      userLoggedIn: false,
      currentUser: '',
+     page: 'home',
      // username: '',
      // password: '',
      // email: '',
@@ -57,6 +58,7 @@ export default class App extends Component {
    this.setState({
      userLoggedIn: uli,
      currentUser: un,
+     page: 'home',
    },
    () => {
      console.log(this.state);
@@ -78,36 +80,56 @@ export default class App extends Component {
             </NavLink>
             <Bars/>
             <NavMenu>
-              <NavLink to="/" activeStyle> Home</NavLink>
+              <NavLink to="/" onClick={() => {
+                this.setState({ page: 'home' });
+              }} activeStyle>Home</NavLink>
             </NavMenu>
             <NavMenu>
-              <NavLink to="/about" activeStyle> About</NavLink>
+              <NavLink to="/"  onClick={() => {
+                this.setState({ page: 'about' });
+              }} activeStyle>About</NavLink>
             </NavMenu>
             <NavMenu>
-              <NavLink to="/contactus" activeStyle> Contact Us</NavLink>
+              <NavLink to="/"  onClick={() => {
+                this.setState({ page: 'contact' });
+              }} activeStyle>Contact Us</NavLink>
             </NavMenu>
             <NavMenu>
-              <NavLink to="/signup" activeStyle> Sign Up</NavLink>
+              {(this.state.userLoggedIn)
+                ?
+                  <NavLink to="/" onClick={() => {
+                    this.setState({ page: 'account' });
+                  }} activeStyle>My Account</NavLink>
+                :
+                  <NewUser baseURL={baseURL} appLogin={this.appLogin} />
+              }
             </NavMenu>
             <NavBtn>
               {(this.state.userLoggedIn)
                 ?
-                  <>
                   <KillSession baseURL={baseURL} appLogin={this.appLogin} />
-                  </>
                 :
-                  <>
                   <NewSession baseURL={baseURL} appLogin={this.appLogin} />
-                  </>
               }
             </NavBtn>
 
           </Nav>
           {/*<BirdsNav baseURL={baseURL} appLogin={this.appLogin} currentUser={this.state.currentUser} userLoggedIn={this.state.userLoggedIn} />*/}
         </Router>
-        <BirdsHeader baseURL={baseURL} name={'Max, Kaushik, and Stephen'}/>
+        {this.state.page === 'home' &&
+          <BirdsHeader baseURL={baseURL} appLogin={this.appLogin} currentUser={this.state.currentUser} userLoggedIn={this.state.userLoggedIn} page='home' />
+        }
+        {this.state.page === 'account' &&
+          <BirdsHeader baseURL={baseURL} appLogin={this.appLogin} currentUser={this.state.currentUser} userLoggedIn={this.state.userLoggedIn} page='account' />
+        }
+        {this.state.page === 'about' &&
+          <BirdsHeader baseURL={baseURL} appLogin={this.appLogin} currentUser={this.state.currentUser} userLoggedIn={this.state.userLoggedIn} page='about' />
+        }
+        {this.state.page === 'contact' &&
+          <BirdsHeader baseURL={baseURL} appLogin={this.appLogin} currentUser={this.state.currentUser} userLoggedIn={this.state.userLoggedIn} page='contact' />
+        }
       </div>
-        {(this.state.userLoggedIn)
+      {/*  {(this.state.userLoggedIn)
           ?
             <>
             <KillSession baseURL={baseURL} appLogin={this.appLogin} />
@@ -119,7 +141,7 @@ export default class App extends Component {
 
             <NewUser baseURL={baseURL} appLogin={this.appLogin} />
             </>
-        }
+        } */}
 
       </>
    );
