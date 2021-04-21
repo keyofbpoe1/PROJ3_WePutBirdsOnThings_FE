@@ -33,6 +33,11 @@ export default class BirdAPI extends Component {
     this.setState({[event.target.id] : event.target.value})
   }
 
+  handleSelChange = (event, data) => {
+    console.log(data.value);
+    this.setState({'areaCode' : data.value})
+  }
+
   handleSubmit = (event) => {
     event.preventDefault()
     console.log(this.state.birdName)
@@ -215,7 +220,7 @@ export default class BirdAPI extends Component {
       <div className="App">
         <form onSubmit={this.handleSubmit}>
         <label htmlFor='areaCode'></label>
-        <Select onChange={this.handleChange} placeholder="State" value={this.state.areaCode} id="areaCode" name="Area Code" options={stOpts} style={{ width:"100px;" }}  />
+        <Select onChange={this.handleSelChange} placeholder="State" id="areaCode" name="Area Code" options={stOpts} />
         <Input
           id="birdName"
           type="text"
