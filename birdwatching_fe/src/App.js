@@ -14,12 +14,29 @@ import KillSession from './components/KillSession.js';
 import BirdAPI from './components/BirdAPI.js';
 import BirdsHeader from './components/BirdsHeader.js'
 import BirdsNav from './components/BirdsNav.js'
+
+import Sidebar from './components/Sidebar.js'
+// import SidebarElements from './components/SidebarElements.js'
+
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import {
   Menu,
   Image
 
 } from 'semantic-ui-react'
+
+
+import {
+  SidebarContainer,
+  Icon,
+  CloseIcon,
+  SidebarWrapper,
+  SidebarMenu,
+  SidebarLink,
+  SidebarRoute,
+  SideBtnWrap
+} from './components/SidebarElements';
+
 
 import{
   Nav, NavLink, Bars, NavMenu, NavBtn, NavBtnLink
@@ -129,19 +146,6 @@ export default class App extends Component {
           <BirdsHeader baseURL={baseURL} appLogin={this.appLogin} currentUser={this.state.currentUser} userLoggedIn={this.state.userLoggedIn} page='contact' />
         }
       </div>
-      {/*  {(this.state.userLoggedIn)
-          ?
-            <>
-            <KillSession baseURL={baseURL} appLogin={this.appLogin} />
-            <DeleteUser baseURL={baseURL} currentUser={this.state.currentUser} appLogin={this.appLogin} />
-            <ShowSingleUser baseURL={baseURL} currentUser={this.state.currentUser} />
-            </>
-          :
-            <>
-
-            <NewUser baseURL={baseURL} appLogin={this.appLogin} />
-            </>
-        } */}
 
       </>
    );
