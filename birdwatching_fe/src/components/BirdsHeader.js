@@ -36,10 +36,14 @@ export default class BirdsHeader extends Component {
         </div>
       }
       {this.state.page === 'about' &&
-        <Header as='h5'>by Max, Kaushik, and Stephen</Header>
+        <div className="centdiv">
+          <Header as='h5'>by Max, Kaushik, and Stephen</Header>
+        </div>
       }
       {this.state.page === 'contact' &&
-        <Header as='h5'>Contact Max, Kaushik, and Stephen</Header>
+        <div className="centdiv">
+          <Header as='h5'>Contact Max, Kaushik, and Stephen</Header>
+        </div>
       }
 
       <Header>

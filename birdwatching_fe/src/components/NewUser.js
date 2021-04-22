@@ -15,6 +15,7 @@ export default class NewUser extends Component {
      pattern: '',
      about: '',
      setOpen: false,
+     warning:'',
    }
  }
 
@@ -39,6 +40,18 @@ export default class NewUser extends Component {
         headers: {
           'Content-Type' : 'application/json'
         },
+      })
+      .catch(err => {
+        if (err.response) {
+          // client received an error response (5xx, 4xx)
+          this.setState({ warning: 'Username or email already in use' });
+        } else if (err.request) {
+          // client never received a response, or request never left
+          this.setState({ warning: 'Username or email already in use' });
+        } else {
+          // anything else
+          this.setState({ warning: 'Username or email already in use' });
+        }
       });
 
       if (response.status===200){
@@ -59,14 +72,19 @@ export default class NewUser extends Component {
               sessionStorage.setItem("userLoggedIn", true);
               sessionStorage.setItem("currentUser", res.data.currentUser);
               this.props.appLogin();
+              this.setState({ setOpen: false });
               //console.log(res.data.currentUser);
             }
           });
+      }
+      else {
+        this.setState({ warning: 'Username or email already in use' });
       }
 
     }
     catch(err){
       console.log('Error => ', err);
+      this.setState({ warning: 'Username or email already in use' });
     }
  }
 
@@ -93,15 +111,17 @@ export default class NewUser extends Component {
            <TextArea title="About Me" id="about" name="about" rows="4" cols="50" onChange={this.handleChange} value1={this.state.about} placeholder="Tell us about yourself" />
            <br/>
            <label htmlFor="pattern"></label>
-           <Input title="Password" type="password" id="pattern" name="pattern" onChange={this.handleChange} value1={this.state.password} placeholder="Enter a New Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required/>
+           <Input type="password" id="pattern" name="pattern" onChange={this.handleChange} value1={this.state.password} placeholder="Enter a New Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Enter a new password: Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required/>
            <br/>
            <label htmlFor="password"></label>
            <Input title="Confirm Password" type="password" id="password" name="password" onChange={this.handleChange} value1={this.state.password} placeholder="Confirm New Password" pattern={this.state.pattern} required/>
+           <br/>
+           <span style={{color:'red'}}>{this.state.warning}</span>
        </Modal.Content>
        <Modal.Actions>
          <Button color='green' onClick={() => {
            this.handleNewUser();
-           this.setState({ setOpen: false });
+           {/*this.setState({ setOpen: false });*/}
           }}>
            Create Account!
          </Button>

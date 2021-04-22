@@ -12,6 +12,7 @@ export default class NewSession extends Component {
       username: '',
       password: '',
       setOpen: false,
+      warning:'',
     }
   }
 
@@ -36,7 +37,23 @@ export default class NewSession extends Component {
           sessionStorage.setItem("userLoggedIn", true);
           sessionStorage.setItem("currentUser", res.data.currentUser);
           this.props.appLogin();
+          this.setState({ setOpen: false });
           //console.log(res.data.currentUser);
+        }
+        else {
+          this.setState({ warning: 'Incorrect username or password' });
+        }
+      })
+      .catch(err => {
+        if (err.response) {
+          // client received an error response (5xx, 4xx)
+          this.setState({ warning: 'Incorrect username or password' });
+        } else if (err.request) {
+          // client never received a response, or request never left
+          this.setState({ warning: 'Incorrect username or password' });
+        } else {
+          // anything else
+          this.setState({ warning: 'Incorrect username or password' });
         }
       });
   }
@@ -69,12 +86,13 @@ export default class NewSession extends Component {
              <label htmlFor="password"></label>
              <Input title="Password" type="password" id="password" name="password" onChange={this.handleChange} value1={this.state.password} placeholder="Confirm Your Password" required />
              <br/>
+             <span style={{color:'red'}}>{this.state.warning}</span>
 
         </Modal.Content>
         <Modal.Actions>
         <Button color='green' onClick={() => {
           this.handleLogin();
-          this.setState({ setOpen: false });
+          {/*this.setState({ setOpen: false });*/}
          }}>
           Sign In
         </Button>

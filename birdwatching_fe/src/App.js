@@ -24,14 +24,15 @@ import{
   Nav, NavLink, Bars, NavMenu, NavBtn
 } from './components/NavBarElements'
 
-let baseURL = '';
+let baseURL = process.env.REACT_APP_BASEURL;
+//console.log(baseURL);
 
-if (process.env.NODE_ENV === 'development') {
-  baseURL = 'http://localhost:3003';
-}
-else {
-  baseURL = 'your heroku backend url here';
-}
+// if (process.env.NODE_ENV === 'development') {
+//   baseURL = 'http://localhost:3003';
+// }
+// else {
+//   baseURL = 'your heroku backend url here';
+// }
 
 export default class App extends Component {
  constructor(props) {
