@@ -81,9 +81,13 @@ export default class JournalShow extends Component {
                   </tr>
                   <tr>
                     <td>
+                      <div class="photowrapper">
                       {this.props.jEnt.photos.map((photo, ind) => (
-                        <img key={ind} src={`${this.props.baseURL}/${photo}`} alt={photo} />
+                        <div class="photedit">
+                          <img key={ind} src={`${this.props.baseURL}/${photo}`} alt={photo} />
+                        </div>
                       ))}
+                      </div>
                     </td>
                   </tr>
                  </tbody>

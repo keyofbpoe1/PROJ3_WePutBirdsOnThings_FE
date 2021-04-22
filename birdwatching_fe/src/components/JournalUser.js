@@ -157,12 +157,15 @@ export default class JournalUser extends Component {
                     <div>
                       <Input type="file" name="file" onChange={this.uploadHandler} accept="image/*" multiple/>
                     </div>
+                    <div class="photowrapper">
                     {this.state.photos.map((photo, ind) => (
-                      <>
+                      <div class="photedit">
                         <img key={ind} src={`${this.props.baseURL}/${photo}`} alt={photo} />
+                        <br/>
                         <Button key={photo} data-img={photo} type="button" onClick={this.remImg}>Remove</Button>
-                      </>
+                      </div>
                     ))}
+                    </div>
                   </div>
 
                 </td>

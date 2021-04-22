@@ -15,3 +15,17 @@ code {
 a:hover {
   cursor: pointer;
 }
+
+.photowrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.photowrapper img {
+  width: 200px;
+}
+
+.photedit {
+  margin: 10px;
+}
