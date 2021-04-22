@@ -217,7 +217,8 @@ export default class BirdAPI extends Component {
       ];
 
     return (
-      <div className="App">
+      <div className="App" >
+        <div class="ui center aligned container">
         <form onSubmit={this.handleSubmit}>
         <label htmlFor='areaCode'></label>
         <Select onChange={this.handleSelChange} placeholder="State" id="areaCode" name="Area Code" options={stOpts} />
@@ -233,6 +234,7 @@ export default class BirdAPI extends Component {
           value='&#128269;'>
         </Input>
       </form>
+      </div>
       {birdlist}
       {pbirdlist}
 
