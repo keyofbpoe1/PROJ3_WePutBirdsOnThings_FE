@@ -12,6 +12,16 @@ code {
     monospace;
 }
 
+.centdiv {
+  margin: auto;
+  width: fit-content;
+}
+
+.centthing {
+  margin: auto;
+  width: fit-content;
+}
+
 a:hover {
   cursor: pointer;
 }

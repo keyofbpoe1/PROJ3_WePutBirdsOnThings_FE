@@ -22,12 +22,16 @@ export default class BirdsHeader extends Component {
   render () {
     return (
       <Segment color='orange' basic inverted padded='very' vertical>
-      <Header as='h1'>Bird Call <Image src={'birdlogo.png'} /></Header>
+      <Header>
+        <h1 class="ui center aligned header"> Bird Call <Image src={'birdlogo.png'} /> </h1>
+      </Header>
       {this.state.page === 'home' &&
         <BirdAPI userURL={this.state.baseURL} currentUser='' jent='' />
       }
       {this.state.page === 'account' &&
-        <ShowSingleUser baseURL={this.state.baseURL} currentUser={this.state.currentUser} appLogin={this.state.appLogin} />
+        <div class="centdiv">
+          <ShowSingleUser baseURL={this.state.baseURL} currentUser={this.state.currentUser} appLogin={this.state.appLogin} />
+        </div>
       }
       {this.state.page === 'about' &&
         <Header as='h5'>by Max, Kaushik, and Stephen</Header>
@@ -35,11 +39,10 @@ export default class BirdsHeader extends Component {
       {this.state.page === 'contact' &&
         <Header as='h5'>Contact Max, Kaushik, and Stephen</Header>
       }
-      {/*<Header as='h5'> by {props.name} </Header>
-      <Image src={'birdlogo.png'} size={'small'} centered/>
 
-      <BirdAPI userURL={this.state.baseURL} currentUser='' jent='' />*/}
-      <Header as='h3'>For Ornithology Enthusiasts</Header>
+      <Header>
+        <h3 class="ui center aligned header"> For Ornithology Enthusiasts</h3>
+      </Header>
       </Segment>
     )
   }

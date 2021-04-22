@@ -126,13 +126,17 @@ export default class ShowSingleUser extends Component {
 
     return (
       <>
-        <h3>Account Information</h3>
+        <div class="centdiv">
+          <h3>Account Information</h3>
+        </div>
+        <br/><br/>
         <table>
           <tbody>
             <tr>
-              <td>
-                <UpdateUser baseURL={this.props.baseURL} currentUser={this.state.currentUser} userUpdate={this.userUpdate} />
-                <DeleteUser baseURL={this.props.baseURL} currentUser={this.state.currentUser} appLogin={this.state.appLogin} />
+              <td style={{textAlign:"center"}} colspan='2'>
+                  <UpdateUser baseURL={this.props.baseURL} currentUser={this.state.currentUser} userUpdate={this.userUpdate} />
+                  <DeleteUser baseURL={this.props.baseURL} currentUser={this.state.currentUser} appLogin={this.state.appLogin} />
+                  <br/><br/>
               </td>
             </tr>
             <tr>
@@ -147,19 +151,13 @@ export default class ShowSingleUser extends Component {
               <td><b>About Me:</b></td>
               <td>{this.state.about}</td>
             </tr>
-            {/*<tr>
-              <td>
-                Pinned Birds:
-                <ul>
-                  {bList}
-                </ul>
-              </td>
-            </tr>*/}
             <tr>
               <td colspan='2' style={{textAlign:"center"}}>
-                Journal Entries:
+                <br/><br/>
+                <h3>Journal Entries:</h3>
                 <br/>
                 <JournalUser currentUser={this.state.currentUser} baseURL={this.props.baseURL} journalUpdate={this.journalUpdate} />
+                <br/><br/>
                 <table style={{margin:"auto"}}>
                   <tbody>
                     {jList}
