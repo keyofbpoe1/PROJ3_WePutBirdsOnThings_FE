@@ -1,20 +1,10 @@
 import React, { Component } from 'react';
-import { Button, Header, Image, Modal } from 'semantic-ui-react'
+import { Button, Modal } from 'semantic-ui-react'
 
 export default class JournalShow extends Component {
  constructor(props) {
    super(props)
    this.state = {
-     // username: '',
-     // password: '',
-     // email: '',
-     // pattern: '',
-     // about: '',
-     // title: '',
-     // notes: '',
-     // title: this.props.jEnt.title,
-     // notes: this.props.jEnt.notes,
-     // photos: this.props.jEnt.photos,
      currentUser: this.props.currentUser,
      datestamp: this.props.datestamp,
      setOpen: false,
@@ -23,7 +13,7 @@ export default class JournalShow extends Component {
  }
 
  getBirds = () => {
-   let bArr = [];
+   //let bArr = [];
    fetch(this.props.baseURL + '/users/' + this.state.currentUser)
      .then(data => {
        return data.json()},
@@ -81,9 +71,9 @@ export default class JournalShow extends Component {
                   </tr>
                   <tr>
                     <td>
-                      <div class="photowrapper">
+                      <div className="photowrapper">
                       {this.props.jEnt.photos.map((photo, ind) => (
-                        <div class="photedit">
+                        <div className="photedit">
                           <img key={ind} src={`${this.props.baseURL}/${photo}`} alt={photo} />
                         </div>
                       ))}

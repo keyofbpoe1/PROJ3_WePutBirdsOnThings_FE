@@ -1,22 +1,15 @@
 import React, { Component } from 'react';
 import BirdAPI from '../components/BirdAPI.js';
-import { Button, Header, Image, Modal, Input, TextArea } from 'semantic-ui-react'
+import { Button, Modal, Input, TextArea } from 'semantic-ui-react'
 import axios from 'axios';
 
 export default class JournalEdit extends Component {
  constructor(props) {
    super(props)
    this.state = {
-     // username: '',
-     // password: '',
-     // email: '',
-     // pattern: '',
-     // about: '',
      title: '',
      notes: '',
      photos: [],
-     //newPhotos: [],
-     //journal: {},
      currentUser: this.props.currentUser,
      datestamp: this.props.datestamp,
      birdlist: [],
@@ -134,17 +127,17 @@ export default class JournalEdit extends Component {
             <tbody>
               <tr>
                 <td valign="top" style={{width:'40%'}}>
-                  <div class="jbapi">
+                  <div className="jbapi">
                     <BirdAPI userURL={this.props.baseURL} currentUser={this.state.currentUser} jent={this.state.datestamp} pBirds={this.state.pBirds} />
                   </div>
                 </td>
                 <td valign="top">
 
                   <label htmlFor="title"></label>
-                  <Input type="text" id="title" name="title" onChange={this.handleChange} value={this.state.title} placeholder="Entry Title" required />
+                  <Input title="Entry Title" type="text" id="title" name="title" onChange={this.handleChange} value={this.state.title} placeholder="Entry Title" required />
                   <br/>
                   <label htmlFor="notes"></label>
-                  <TextArea id="notes" name="notes" rows="4" cols="50" onChange={this.handleChange} value={this.state.notes} placeholder="Enter a note!" />
+                  <TextArea title="Notes" id="notes" name="notes" rows="4" cols="50" onChange={this.handleChange} value={this.state.notes} placeholder="Enter a note!" />
                   <br/>
 
                   <div>
@@ -152,9 +145,9 @@ export default class JournalEdit extends Component {
                     <div>
                       <Input type="file" name="file" onChange={this.uploadHandler} accept="image/*" multiple/>
                     </div>
-                    <div class="photowrapper">
+                    <div className="photowrapper">
                     {this.state.photos.map((photo, ind) => (
-                      <div class="photedit">
+                      <div className="photedit">
                         <img key={ind} src={`${this.props.baseURL}/${photo}`} alt={photo} />
                         <br/>
                         <Button key={photo} data-img={photo} type="button" onClick={this.remImg}>Remove</Button>

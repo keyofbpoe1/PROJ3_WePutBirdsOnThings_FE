@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import BirdSeen from '../components/BirdSeen.js';
+//import BirdSeen from '../components/BirdSeen.js';
 import UpdateUser from '../components/UpdateUser.js';
 import JournalShow from '../components/JournalShow.js';
 import JournalUser from '../components/JournalUser.js';
@@ -99,7 +99,7 @@ export default class ShowSingleUser extends Component {
    console.log(this.state.journal);
 
    let bList;
-   let bArr = this.state.birdlist;
+   //let bArr = this.state.birdlist;
 
    let jList;
    let jArr = this.state.journal;
@@ -126,7 +126,7 @@ export default class ShowSingleUser extends Component {
 
     return (
       <>
-        <div class="centdiv">
+        <div className="centdiv">
           <h3>Account Information</h3>
         </div>
         <br/><br/>

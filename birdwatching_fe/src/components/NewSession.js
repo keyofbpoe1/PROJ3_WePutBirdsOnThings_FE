@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Button, Header, Image, Modal, Menu, Input } from 'semantic-ui-react'
-import{
-  Nav, NavLink, Bars, NavMenu, NavBtn, NavBtnLink
-} from './NavBarElements'
+import { Button, Modal, Input } from 'semantic-ui-react'
+// import{
+//   Nav, NavLink, Bars, NavMenu, NavBtn, NavBtnLink
+// } from './NavBarElements'
 import Axios from "axios";
 
 export default class NewSession extends Component {
@@ -64,14 +64,11 @@ export default class NewSession extends Component {
           <Modal.Content>
 
              <label htmlFor="username"></label>
-             <Input type="text" id="username" name="username" onChange={this.handleChange} value1={this.state.username} placeholder="Enter Your Username" required />
+             <Input title="Username" type="text" id="username" name="username" onChange={this.handleChange} value1={this.state.username} placeholder="Enter Your Username" required />
              <br/>
              <label htmlFor="password"></label>
-             <Input type="password" id="password" name="password" onChange={this.handleChange} value1={this.state.password} placeholder="Confirm Your Password" required />
+             <Input title="Password" type="password" id="password" name="password" onChange={this.handleChange} value1={this.state.password} placeholder="Confirm Your Password" required />
              <br/>
-
-
-
 
         </Modal.Content>
         <Modal.Actions>
@@ -87,11 +84,7 @@ export default class NewSession extends Component {
         </Modal.Actions>
       </Modal>
 
-
        </>
-
-
-
     );
    }
 }

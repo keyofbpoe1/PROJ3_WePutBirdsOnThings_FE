@@ -1,5 +1,5 @@
 import React, { Component} from 'react'
-import { Button, Header, Image, Modal, Input, Select, Grid, Item } from 'semantic-ui-react'
+import { Button, Input, Select, Item } from 'semantic-ui-react'
 import axios from 'axios'
 // import BirdData from './components/BirdData'
 // sd1dnat8ktfu
@@ -20,14 +20,9 @@ export default class BirdAPI extends Component {
     currentUser: this.props.currentUser,
     jent: this.props.jent,
     pBirds: this.props.pBirds,
-    //seen: false,
-    //curbird: {},
    }
   }
 
-  // componentDidMount() {
-  //   this.getBird()
-  // }
   handleChange = (event) => {
     console.log(event.target.value)
     this.setState({[event.target.id] : event.target.value})
@@ -45,39 +40,19 @@ export default class BirdAPI extends Component {
   }
 
   async getBird() {
-    // npm install axios on "birdwatch_fe"
-    // axios.get(`https://api.ebird.org/v2/data/obs/US-${VA}/recent`
     await axios.get(this.state.baseUrl + this.state.areaCode + this.state.recent, {
     headers: {
       'X-eBirdApiToken': 'sd1dnat8ktfu'
-
-
-      // 'maxResults': 1
     }
-  }).then(res => {
-    console.log(res.data)
-    let regFilter = new RegExp(this.state.birdName, 'gmi')
-    let birds = res.data.filter((obj) =>{
-      return obj.comName.match(regFilter) //=== this.state.birdName
+    }).then(res => {
+      console.log(res.data)
+      let regFilter = new RegExp(this.state.birdName, 'gmi')
+      let birds = res.data.filter((obj) =>{
+        return obj.comName.match(regFilter) //=== this.state.birdName
+      })
+      this.setState({birds: birds})
     })
-    this.setState({birds: birds})
-  })
-
-
-
-    // name => name === this.state.birdName
   }
-  // filterBirds = () => {
-  // let filterBirds;
-  // let copyList;
-  // copyList = this.state.birds
-  //   filterBirds = copyList.filter((obj) =>{
-  //     return obj.comName === this.state.birdName
-  //   })
-  //   this.setState({
-  //     birds: filterBirds
-  //   })
-  // }
 
   pinBird = async (event) => {
     //window.alert(event.target.dataset.birdname);
@@ -173,10 +148,7 @@ export default class BirdAPI extends Component {
     (birdlist = this.state.birds.map((bird, id) => {
       let pinBut;
       if (this.state.currentUser.length > 1) {
-        //return (
-          pinBut = <Button id={'pinBut' + bird.subId} data-sibbut={'remBut' + bird.subId} type="button" data-curbird={JSON.stringify(bird)} onClick={this.pinBird}>Pin</Button>;
-        //  remBut = <Button id={'remBut' + bird.subId} data-sibbut={'pinBut' + bird.subId} type="button" data-curbird={JSON.stringify(bird)} onClick={this.remBird} style={{display: 'none'}}>Unpin</Button>;
-        //)
+        pinBut = <Button id={'pinBut' + bird.subId} data-sibbut={'remBut' + bird.subId} type="button" data-curbird={JSON.stringify(bird)} onClick={this.pinBird}>Pin</Button>;
       }
       return (
         <div>
@@ -192,7 +164,7 @@ export default class BirdAPI extends Component {
                 </Item.Group>
            </div>
 
-      )}
+         )}
       ))
 
       let pbirdlist;
@@ -200,18 +172,11 @@ export default class BirdAPI extends Component {
       (pbirdlist = this.state.pBirds.map((bird, id) => {
         let remBut;
         if (this.state.currentUser.length > 1) {
-          //return (
-          //  pinBut = <Button id={'pinBut' + bird.subId} data-sibbut={'remBut' + bird.subId} type="button" data-curbird={JSON.stringify(bird)} onClick={this.pinBird}>Pin</Button>;
-            remBut = <Button id={'remBut' + bird.subId} data-sibbut={'pinBut' + bird.subId} type="button" data-curbird={JSON.stringify(bird)} onClick={this.remBird}>Unpin</Button>;
-          //)
+          remBut = <Button id={'remBut' + bird.subId} data-sibbut={'pinBut' + bird.subId} type="button" data-curbird={JSON.stringify(bird)} onClick={this.remBird}>Unpin</Button>;
         }
         return (
           <div key={id}>
-
               <h4>{remBut} {bird.comName}</h4>
-
-
-
           </div>
 
         )}
@@ -272,15 +237,16 @@ export default class BirdAPI extends Component {
 
     return (
       <div className="App">
-        <form onSubmit={this.handleSubmit} class="centdiv">
+        <form onSubmit={this.handleSubmit} className="centdiv">
         <label htmlFor='areaCode'></label>
-        <Select onChange={this.handleSelChange} placeholder="State" id="areaCode" name="Area Code" options={stOpts} />
+        <Select title="Select a State" onChange={this.handleSelChange} placeholder="State" id="areaCode" name="Area Code" options={stOpts} />
         <Input
           id="birdName"
           type="text"
           value={this.state.birdName}
           onChange={this.handleChange}
           placeholder="Search..."
+          title="Search for a Bird Name"
         ></Input>
         <Input
           type='submit'

@@ -1,28 +1,27 @@
 import React, { Component } from 'react';
 import NewUser from './components/NewUser.js';
-import UpdateUser from './components/UpdateUser.js';
-import DeleteUser from './components/DeleteUser.js';
-import JournalUser from './components/JournalUser.js';
-import ShowUsers from './components/ShowUsers.js';
-import ShowSingleUser from './components/ShowSingleUser.js';
-import JournalShow from './components/JournalShow.js';
-import JournalEdit from './components/JournalEdit.js';
-import JournalDelete from './components/JournalDelete.js';
-import NewImage from './components/NewImage.js';
+//import UpdateUser from './components/UpdateUser.js';
+//import DeleteUser from './components/DeleteUser.js';
+//import JournalUser from './components/JournalUser.js';
+//import ShowUsers from './components/ShowUsers.js';
+//import ShowSingleUser from './components/ShowSingleUser.js';
+// import JournalShow from './components/JournalShow.js';
+// import JournalEdit from './components/JournalEdit.js';
+// import JournalDelete from './components/JournalDelete.js';
+//import NewImage from './components/NewImage.js';
 import NewSession from './components/NewSession.js';
 import KillSession from './components/KillSession.js';
-import BirdAPI from './components/BirdAPI.js';
+//import BirdAPI from './components/BirdAPI.js';
 import BirdsHeader from './components/BirdsHeader.js'
-import BirdsNav from './components/BirdsNav.js'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+//import BirdsNav from './components/BirdsNav.js'
+import { BrowserRouter as Router } from 'react-router-dom';
 import {
-  Menu,
   Image
 
 } from 'semantic-ui-react'
 
 import{
-  Nav, NavLink, Bars, NavMenu, NavBtn, NavBtnLink
+  Nav, NavLink, Bars, NavMenu, NavBtn
 } from './components/NavBarElements'
 
 let baseURL = '';
@@ -114,7 +113,6 @@ export default class App extends Component {
             </NavBtn>
 
           </Nav>
-          {/*<BirdsNav baseURL={baseURL} appLogin={this.appLogin} currentUser={this.state.currentUser} userLoggedIn={this.state.userLoggedIn} />*/}
         </Router>
         {this.state.page === 'home' &&
           <BirdsHeader baseURL={baseURL} appLogin={this.appLogin} currentUser={this.state.currentUser} userLoggedIn={this.state.userLoggedIn} page='home' />

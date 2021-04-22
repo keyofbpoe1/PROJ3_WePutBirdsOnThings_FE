@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Button, Header, Image, Modal, Menu, Input, TextArea } from 'semantic-ui-react'
+import { Button, Modal, Input, TextArea } from 'semantic-ui-react'
 import{
-  Nav, NavLink, Bars, NavMenu, NavBtn, NavBtnLink
+  NavLink
 } from './NavBarElements'
 import Axios from "axios";
 
@@ -84,19 +84,19 @@ export default class NewUser extends Component {
        <Modal.Header>Create a New Account</Modal.Header>
          <Modal.Content>
            <label htmlFor="username"></label>
-           <Input type="text" id="username" name="username" onChange={this.handleChange} value1={this.state.username} placeholder="Enter a New Username" required pattern="^[a-zA-Z0-9]*$"/>
+           <Input title="Username" type="text" id="username" name="username" onChange={this.handleChange} value1={this.state.username} placeholder="Enter a New Username" required pattern="^[a-zA-Z0-9]*$"/>
            <br/>
            <label htmlFor="email"></label>
-           <Input type="email" id="email" name="email" onChange={this.handleChange} value1={this.state.email} placeholder="Enter Your Email Address" required/>
+           <Input title="Email Address" type="email" id="email" name="email" onChange={this.handleChange} value1={this.state.email} placeholder="Enter Your Email Address" required/>
            <br/>
            <label htmlFor="about"></label>
-           <TextArea id="about" name="about" rows="4" cols="50" onChange={this.handleChange} value1={this.state.about} placeholder="Tell us about yourself" />
+           <TextArea title="About Me" id="about" name="about" rows="4" cols="50" onChange={this.handleChange} value1={this.state.about} placeholder="Tell us about yourself" />
            <br/>
            <label htmlFor="pattern"></label>
-           <Input type="password" id="pattern" name="pattern" onChange={this.handleChange} value1={this.state.password} placeholder="Enter a New Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required/>
+           <Input title="Password" type="password" id="pattern" name="pattern" onChange={this.handleChange} value1={this.state.password} placeholder="Enter a New Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required/>
            <br/>
            <label htmlFor="password"></label>
-           <Input type="password" id="password" name="password" onChange={this.handleChange} value1={this.state.password} placeholder="Confirm New Password" pattern={this.state.pattern} required/>
+           <Input title="Confirm Password" type="password" id="password" name="password" onChange={this.handleChange} value1={this.state.password} placeholder="Confirm New Password" pattern={this.state.pattern} required/>
        </Modal.Content>
        <Modal.Actions>
          <Button color='green' onClick={() => {

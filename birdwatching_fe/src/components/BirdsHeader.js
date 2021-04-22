@@ -23,15 +23,15 @@ export default class BirdsHeader extends Component {
     return (
       <Segment color='orange' basic inverted padded='very' vertical>
       <Header>
-        <h1 class="ui center aligned header"> Bird Call <Image src={'birdlogo.png'} /> </h1>
+        <h1 className="ui center aligned header"> Bird Call <Image src={'birdlogo.png'} /> </h1>
       </Header>
       {this.state.page === 'home' &&
-        <div class="centdiv mainsearch">
+        <div className="centdiv mainsearch">
         <BirdAPI userURL={this.state.baseURL} currentUser='' jent='' />
         </div>
       }
       {this.state.page === 'account' &&
-        <div class="centdiv">
+        <div className="centdiv">
           <ShowSingleUser baseURL={this.state.baseURL} currentUser={this.state.currentUser} appLogin={this.state.appLogin} />
         </div>
       }
@@ -43,7 +43,7 @@ export default class BirdsHeader extends Component {
       }
 
       <Header>
-        <h3 class="ui center aligned header"> For Ornithology Enthusiasts</h3>
+        <h3 className="ui center aligned header"> For Ornithology Enthusiasts</h3>
       </Header>
       </Segment>
     )

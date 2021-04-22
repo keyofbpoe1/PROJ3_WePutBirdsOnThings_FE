@@ -2,13 +2,11 @@ import React, { Component } from 'react';
 import NewSession from '../components/NewSession.js';
 import KillSession from '../components/KillSession.js';
 import {
-  Menu,
   Image
-
 } from 'semantic-ui-react'
 
 import{
-  Nav, NavLink, Bars, NavMenu, NavBtn, NavBtnLink
+  Nav, NavLink, Bars, NavMenu, NavBtn
 } from './NavBarElements'
 
 export default class BirdsNav extends Component {

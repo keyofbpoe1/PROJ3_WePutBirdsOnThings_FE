@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Header, Image, Modal, Input, TextArea, Label } from 'semantic-ui-react'
+import { Button, Modal, Input, TextArea } from 'semantic-ui-react'
 
 export default class UpdateUser extends Component {
  constructor(props) {
@@ -50,17 +50,17 @@ export default class UpdateUser extends Component {
        <Modal.Header>Edit {this.state.username}</Modal.Header>
        <Modal.Content image>
          <Modal.Description>
-           <Label htmlFor="username">Username</Label>
+           <label htmlFor="username"></label>
            <br/>
-           <Input type="text" id="username" name="username" onChange={this.handleChange} value={this.state.username} placeholder="Enter a New Username" required pattern="^[a-zA-Z0-9]*$"/>
+           <Input title="Username" type="text" id="username" name="username" onChange={this.handleChange} value={this.state.username} placeholder="Enter a New Username" required pattern="^[a-zA-Z0-9]*$"/>
            <br/>
-           <Label htmlFor="email">Email Address</Label>
+           <label htmlFor="email"></label>
            <br/>
-           <Input type="email" id="email" name="email" onChange={this.handleChange} value={this.state.email} placeholder="Enter Your Email Address" required/>
+           <Input title="Email Address" type="email" id="email" name="email" onChange={this.handleChange} value={this.state.email} placeholder="Enter Your Email Address" required/>
            <br/>
-           <Label htmlFor="about">About Me</Label>
+           <label htmlFor="about"></label>
            <br/>
-           <TextArea id="about" name="about" rows="4" cols="50" onChange={this.handleChange} value={this.state.about} placeholder="Tell us about yourself" />
+           <TextArea title="About Me" id="about" name="about" rows="4" cols="50" onChange={this.handleChange} value={this.state.about} placeholder="Tell us about yourself" />
 
          </Modal.Description>
        </Modal.Content>
@@ -76,8 +76,6 @@ export default class UpdateUser extends Component {
          </Button>
        </Modal.Actions>
      </Modal>
-
-
 
      </>
    );

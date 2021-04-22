@@ -4,11 +4,6 @@ export default class ShowUsers extends Component {
  constructor(props) {
    super(props)
    this.state = {
-     // username: '',
-     // password: '',
-     // email: '',
-     // pattern: '',
-     // about: '',
      query: '',
      users: [],
    }
@@ -40,33 +35,6 @@ export default class ShowUsers extends Component {
       this.getUsers();
     });
   }
-
- // handleSubmit = async (event) => {
- //   event.preventDefault();
- //
- //   const url = this.props.baseURL + '/users/' + this.state.user;
- //
- //    try{
- //      const response = await fetch( url, {
- //        method: 'GET',
- //        // body: JSON.stringify({
- //        //   username: this.state.username,
- //        //   email: this.state.email,
- //        //   about: this.state.about,
- //        // }),
- //        headers: {
- //          'Content-Type' : 'application/json'
- //        },
- //      });
- //
- //      if (response.status===200){
- //        console.log('users gotten');
- //      }
- //    }
- //    catch(err){
- //      console.log('Error => ', err);
- //    }
- // }
 
  render () {
     return (
