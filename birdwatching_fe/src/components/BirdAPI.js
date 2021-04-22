@@ -1,6 +1,7 @@
 import React, { Component} from 'react'
-import { Button, Header, Image, Modal, Input, Select } from 'semantic-ui-react'
+import { Button, Header, Image, Modal, Input, Select, Grid, Item } from 'semantic-ui-react'
 import axios from 'axios'
+import '../App.css'
 // import BirdData from './components/BirdData'
 // sd1dnat8ktfu
 
@@ -159,9 +160,13 @@ export default class BirdAPI extends Component {
      // document.getElementById(event.target.id).setAttribute('style', 'display: none;');
      // document.getElementById(event.target.dataset.sibbut).setAttribute('style', 'display: block;');
   }
-
+formatTime = (dateString) => {
+      let d = new Date (dateString)
+      let formatDate = d.toLocaleString()
+      return formatDate
+    }
   render () {
-
+    
     let birdlist;
     this.state.birds &&
     (birdlist = this.state.birds.map((bird, id) => {
@@ -173,17 +178,18 @@ export default class BirdAPI extends Component {
         //)
       }
       return (
-        <div key={id}>
-
-            <h4>{bird.comName}</h4>
-            {pinBut}
-            <ul>
-              <li>Location Seen: {bird.locName}</li>
-              <li>Observed Date: {bird.obsDt}</li>
-              <li>Scientific Name: {bird.sciName}</li>
-            </ul>
-
-        </div>
+      
+            <div>
+              <br></br>
+              <Item.Group>
+                  <Item>
+                    <Item.Content>
+                      <Item.Header><h1 id="birdHeader">{bird.comName}</h1></Item.Header>
+                      <Item.Description>This bird was observed on {this.formatTime(bird.obsDt)} at {bird.locName}. </Item.Description>
+                    </Item.Content>
+                  </Item>
+                </Item.Group>
+           </div>
 
       )}
       ))
@@ -211,13 +217,62 @@ export default class BirdAPI extends Component {
       ))
 
       const stOpts = [
-        {key: 'DC', value: 'DC', text: 'DC'},
-        {key: 'VA', value: 'VA', text: 'VA'},
-        {key: 'MD', value: 'MD', text: 'MD'},
+        {key: 'AK', value: 'AK', text: 'Alaska'},
+        {key: 'AZ', value: 'AZ', text: 'Arizona'},
+        {key: 'AR', value: 'AR', text: 'Arkansas'},
+        {key: 'CA', value: 'CA', text: 'California'},
+        {key: 'CO', value: 'CO', text: 'Colorado'},
+        {key: 'CT', value: 'CT', text: 'Connecticut'},
+        {key: 'DE', value: 'DE', text: 'Delaware'},
+        {key: 'FL', value: 'FL', text: 'Florida'},
+        {key: 'GA', value: 'GA', text: 'Georgia'},
+        {key: 'HI', value: 'HI', text: 'Hawaii'},
+        {key: 'ID', value: 'ID', text: 'Idaho'},
+        {key: 'IL', value: 'IL', text: 'Illinois'},
+        {key: 'IN', value: 'IN', text: 'Indiana'},
+        {key: 'IA', value: 'IA', text: 'Iowa'},
+        {key: 'KS', value: 'KS', text: 'Kansas'},
+        {key: 'KY', value: 'KY', text: 'Kentucky'},
+        {key: 'LA', value: 'LA', text: 'Louisiana'},
+        {key: 'ME', value: 'ME', text: 'Maine'},
+        {key: 'MD', value: 'MD', text: 'Maryland'},
+        {key: 'MA', value: 'MA', text: 'Massachusetts'},
+        {key: 'MI', value: 'MI', text: 'Michigan'},
+        {key: 'MN', value: 'MN', text: 'Minnesota'},
+        {key: 'MS', value: 'MS', text: 'Mississippi'},
+        {key: 'MO', value: 'MO', text: 'Missouri'},
+        {key: 'MT', value: 'MT', text: 'Montana'},
+        {key: 'NE', value: 'NE', text: 'Nebraska'},
+        {key: 'NV', value: 'NV', text: 'Nevada'},
+        {key: 'NH', value: 'NH', text: 'New Hampshire'},
+        {key: 'NJ', value: 'NJ', text: 'New Jersey'},
+        {key: 'NM', value: 'NM', text: 'New Mexico'},
+        {key: 'NY', value: 'NY', text: 'New York'},
+        {key: 'NC', value: 'NC', text: 'North Carolina'},
+        {key: 'ND', value: 'ND', text: 'North Dakota'},
+        {key: 'OH', value: 'OH', text: 'Ohio'},
+        {key: 'OK', value: 'OK', text: 'Oklahoma'},
+        {key: 'OR', value: 'OR', text: 'Oregon'},
+        {key: 'PA', value: 'PA', text: 'Pennsylvania'},
+        {key: 'RI', value: 'RI', text: 'Rhode Island'},
+        {key: 'SC', value: 'SC', text: 'South Carolina'},
+        {key: 'SD', value: 'SD', text: 'South Dakota'},
+        {key: 'TN', value: 'TN', text: 'Tennessee'},
+        {key: 'TX', value: 'TX', text: 'Texas'},
+        {key: 'UT', value: 'UT', text: 'Utah'},
+        {key: 'VT', value: 'VT', text: 'Vermont'},
+        {key: 'VA', value: 'VA', text: 'Virginia'},
+        {key: 'WA', value: 'WA', text: 'Washington'},
+        {key: 'DC', value:'DC', text: 'Washington, D.C.'},
+        {key: 'WV', value: 'WV', text: 'West Virginia'},
+        {key: 'WI', value: 'WI', text: 'Wisconsin'},
+        {key: 'WY', value: 'WY', text: 'Wyoming'},
       ];
 
     return (
       <div className="App">
+        <div id="searchBar"> 
+          {/* class="ui center aligned container" */}
         <form onSubmit={this.handleSubmit}>
         <label htmlFor='areaCode'></label>
         <Select onChange={this.handleSelChange} placeholder="State" id="areaCode" name="Area Code" options={stOpts} />
@@ -226,7 +281,7 @@ export default class BirdAPI extends Component {
           type="text"
           value={this.state.birdName}
           onChange={this.handleChange}
-          placeholder="Search..."
+          placeholder="Search Bird..."
         ></Input>
         <Input
           type='submit'
@@ -235,8 +290,8 @@ export default class BirdAPI extends Component {
       </form>
       {birdlist}
       {pbirdlist}
-
       </div>
+    </div>
     );
   }
 }

@@ -1,3 +1,7 @@
+*{
+  font: sans-serif lato;
+}
+
 .App {
   text-align: center;
 }
@@ -26,6 +30,23 @@
 
 .App-link {
   color: #61dafb;
+}
+
+.Bird-api {
+  color: white;
+}
+
+.center-header {
+  text-align: center;
+}
+
+#birdHeader {
+  text-align: left;
+  color: white;
+}
+
+#searchBar {
+  text-align: center;
 }
 
 @keyframes App-logo-spin {

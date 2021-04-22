@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import BirdAPI from '../components/BirdAPI.js';
-import { Button, Header, Image, Modal } from 'semantic-ui-react'
+import { Button, Header, Image, Modal, Input, Form, TextArea } from 'semantic-ui-react'
 import axios from 'axios';
 
 export default class JournalUser extends Component {
@@ -142,10 +142,27 @@ export default class JournalUser extends Component {
            <Header>New Journal Entry</Header>
 
            <label htmlFor="title"></label>
-           <input type="text" id="title" name="title" onChange={this.handleChange} value1={this.state.title} placeholder="Entry Title" required />
+           <Input 
+           type="text" 
+           id="title" 
+           name="title" 
+           onChange={this.handleChange} 
+           value1={this.state.title} 
+           placeholder="Entry Title" 
+           required ></Input>
            <br/>
            <label htmlFor="notes"></label>
-           <textarea id="notes" name="notes" rows="4" cols="50" onChange={this.handleChange} value1={this.state.notes} placeholder="Enter a note!"></textarea>
+           <Form>
+            <TextArea 
+              id="notes" 
+              name="notes" r
+              ows="4"
+              cols="50" 
+              onChange={this.handleChange} 
+              value1={this.state.notes} 
+              placeholder="Enter a note!">
+            </TextArea>
+           </Form>
            <br/>
 
            <div>

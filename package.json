@@ -2,5 +2,23 @@
   "dependencies": {
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^2.0.3"
-  }
+  },
+  "name": "PROJ3_WePutBirdsOnThings_FE",
+  "description": "Birdwatching App front end",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/keyofbpoe1/PROJ3_WePutBirdsOnThings_FE.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/keyofbpoe1/PROJ3_WePutBirdsOnThings_FE/issues"
+  },
+  "homepage": "https://github.com/keyofbpoe1/PROJ3_WePutBirdsOnThings_FE#readme"
 }
