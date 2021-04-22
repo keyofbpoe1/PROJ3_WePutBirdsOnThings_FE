@@ -141,8 +141,10 @@ export default class JournalUser extends Component {
            <table>
             <tbody>
               <tr>
-                <td valign="top">
-                  <BirdAPI userURL={this.props.baseURL} currentUser={this.state.currentUser} jent={this.state.datestamp} pBirds={this.state.pBirds} />
+                <td valign="top" style={{width:'40%'}}>
+                  <div class="jbapi">
+                    <BirdAPI userURL={this.props.baseURL} currentUser={this.state.currentUser} jent={this.state.datestamp} pBirds={this.state.pBirds} />
+                  </div>
                 </td>
                 <td valign="top">
                   <label htmlFor="title"></label>

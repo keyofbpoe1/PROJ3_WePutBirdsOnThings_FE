@@ -26,7 +26,9 @@ export default class BirdsHeader extends Component {
         <h1 class="ui center aligned header"> Bird Call <Image src={'birdlogo.png'} /> </h1>
       </Header>
       {this.state.page === 'home' &&
+        <div class="centdiv mainsearch">
         <BirdAPI userURL={this.state.baseURL} currentUser='' jent='' />
+        </div>
       }
       {this.state.page === 'account' &&
         <div class="centdiv">

@@ -129,19 +129,6 @@ export default class App extends Component {
           <BirdsHeader baseURL={baseURL} appLogin={this.appLogin} currentUser={this.state.currentUser} userLoggedIn={this.state.userLoggedIn} page='contact' />
         }
       </div>
-      {/*  {(this.state.userLoggedIn)
-          ?
-            <>
-            <KillSession baseURL={baseURL} appLogin={this.appLogin} />
-            <DeleteUser baseURL={baseURL} currentUser={this.state.currentUser} appLogin={this.appLogin} />
-            <ShowSingleUser baseURL={baseURL} currentUser={this.state.currentUser} />
-            </>
-          :
-            <>
-
-            <NewUser baseURL={baseURL} appLogin={this.appLogin} />
-            </>
-        } */}
 
       </>
    );
