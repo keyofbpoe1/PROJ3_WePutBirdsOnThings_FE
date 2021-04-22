@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import BirdAPI from '../components/BirdAPI.js';
-import { Button, Header, Image, Modal } from 'semantic-ui-react'
+import { Button, Header, Image, Modal, Input, TextArea } from 'semantic-ui-react'
 import axios from 'axios';
 
 export default class JournalEdit extends Component {
@@ -85,7 +85,7 @@ export default class JournalEdit extends Component {
              notes: this.state.notes,
              title: this.state.title,
              photos: this.state.photos,
-           }
+           },
          );
        }
      }
@@ -93,35 +93,6 @@ export default class JournalEdit extends Component {
        console.log('Error => ', err);
      }
   }
-
- // handleSubmit = async (event) => {
- //   event.preventDefault();
- //
- //   const url = this.props.baseURL + '/users/' + this.state.user + '/journal';
- //
- //    try{
- //      const response = await fetch( url, {
- //        method: 'PUT',
- //        body: JSON.stringify({
- //          datestamp: this.state.datestamp,
- //          notes: this.state.notes,
- //          title: this.state.title,
- //          photos: this.state.photos,
- //          type: 'update',
- //        }),
- //        headers: {
- //          'Content-Type' : 'application/json'
- //        },
- //      });
- //
- //      if (response.status===200){
- //        console.log('journal updated');
- //      }
- //    }
- //    catch(err){
- //      console.log('Error => ', err);
- //    }
- // }
 
  uploadHandler = (event) => {
    const url = this.props.baseURL + '/upload';
@@ -154,35 +125,46 @@ export default class JournalEdit extends Component {
        onOpen={() => this.setState({ setOpen: true }) }
        open={this.state.setOpen}
        trigger={<Button>&#128393;</Button>}
+       size='fullscreen'
      >
        <Modal.Header>Edit Journal Entry</Modal.Header>
-       <Modal.Content image>
-        <BirdAPI userURL={this.props.baseURL} currentUser={this.state.currentUser} jent={this.state.datestamp} pBirds={this.state.pBirds} />
-         <Modal.Description>
+       <Modal.Content>
 
-           <label htmlFor="title"></label>
-           <input type="text" id="title" name="title" onChange={this.handleChange} value={this.state.title} placeholder="Entry Title" required />
-           <br/>
-           <label htmlFor="notes"></label>
-           <textarea id="notes" name="notes" rows="4" cols="50" onChange={this.handleChange} value={this.state.notes} placeholder="Enter a note!"></textarea>
-           <br/>
+           <table>
+            <tbody>
+              <tr>
+                <td valign="top">
+                  <BirdAPI userURL={this.props.baseURL} currentUser={this.state.currentUser} jent={this.state.datestamp} pBirds={this.state.pBirds} />
+                </td>
+                <td valign="top">
 
-           <div>
-            <h4>Images</h4>
-             <div>
-               <input type="file" name="file" onChange={this.uploadHandler} accept="image/*" multiple/>
-             </div>
-             {this.state.photos.map((photo, ind) => (
-               <>
-                 <img key={ind} src={`${this.props.baseURL}/${photo}`} alt={photo} />
-                 <button key={photo} data-img={photo} type="button" onClick={this.remImg}>Remove</button>
-               </>
-             ))}
+                  <label htmlFor="title"></label>
+                  <Input type="text" id="title" name="title" onChange={this.handleChange} value={this.state.title} placeholder="Entry Title" required />
+                  <br/>
+                  <label htmlFor="notes"></label>
+                  <TextArea id="notes" name="notes" rows="4" cols="50" onChange={this.handleChange} value={this.state.notes} placeholder="Enter a note!" />
+                  <br/>
 
-           </div>
+                  <div>
+                   <h4>Images</h4>
+                    <div>
+                      <Input type="file" name="file" onChange={this.uploadHandler} accept="image/*" multiple/>
+                    </div>
+                    {this.state.photos.map((photo, ind) => (
+                      <>
+                        <img key={ind} src={`${this.props.baseURL}/${photo}`} alt={photo} />
+                        <Button key={photo} data-img={photo} type="button" onClick={this.remImg}>Remove</Button>
+                      </>
+                    ))}
 
-         </Modal.Description>
-       </Modal.Content>
+                  </div>
+
+                </td>
+              </tr>
+            </tbody>
+           </table>
+
+         </Modal.Content>
        <Modal.Actions>
          <Button color='green' onClick={() => {
            this.handleJEdit();

@@ -87,7 +87,7 @@ export default class ShowSingleUser extends Component {
    this.setState({ journal: jCopy});
  }
 
- editJournal = (eInd, uEnt) => {
+ editJournal = (eInd, uEnt, pBirds) => {
    let jCopy = this.state.journal;
    jCopy.splice(eInd, 1, uEnt);
    this.setState({ journal: jCopy});
@@ -100,38 +100,23 @@ export default class ShowSingleUser extends Component {
 
    let bList;
    let bArr = this.state.birdlist;
-   // if (bArr) {
-   //   bList = bArr.map((bird, ind) => {
-   //     let bs = "Searching For";
-   //     if (bird.seen) {
-   //       bs = "Seen!"
-   //     }
-   //     return (
-   //        <li key={ind}>
-   //          {bird.birdname}
-   //          <br/>
-   //          {bs}
-   //          <br/>
-   //          {(bird.seen)
-   //            ? <></>
-   //            : <BirdSeen baseURL={this.props.baseURL} currentUser={this.state.currentUser} birdname={bird.birdname} />
-   //          }
-   //
-   //        </li>
-   //     )
-   //   });
-   // }
 
    let jList;
    let jArr = this.state.journal;
    if (jArr) {
      jList = jArr.map((journ, ind) => {
        return (
-          <li key={ind}>
-            <JournalShow currentUser={this.state.currentUser} datestamp={journ.datestamp} baseURL={this.props.baseURL} jEnt={journ} />
-            <JournalEdit currentUser={this.state.currentUser} datestamp={journ.datestamp} baseURL={this.props.baseURL} jEnt={journ} editJournal={this.editJournal} eInd={ind} />
-            <JournalDelete currentUser={this.state.currentUser} datestamp={journ.datestamp} remJournal={this.remJournal} remInd={ind} baseURL={this.props.baseURL} />
-          </li>
+          <tr key={ind}>
+            <td>
+              <JournalShow currentUser={this.state.currentUser} datestamp={journ.datestamp} baseURL={this.props.baseURL} jEnt={journ} />
+            </td>
+            <td>
+              <JournalEdit currentUser={this.state.currentUser} datestamp={journ.datestamp} baseURL={this.props.baseURL} jEnt={journ} editJournal={this.editJournal} eInd={ind} />
+            </td>
+            <td>
+              <JournalDelete currentUser={this.state.currentUser} datestamp={journ.datestamp} remJournal={this.remJournal} remInd={ind} baseURL={this.props.baseURL} />
+            </td>
+          </tr>
        )
      });
    }
@@ -141,16 +126,25 @@ export default class ShowSingleUser extends Component {
 
     return (
       <>
-        <h3>User</h3>
+        <h3>Account Information</h3>
         <table>
           <tbody>
             <tr>
+              <td>
+                <UpdateUser baseURL={this.props.baseURL} currentUser={this.state.currentUser} userUpdate={this.userUpdate} />
+                <DeleteUser baseURL={this.props.baseURL} currentUser={this.state.currentUser} appLogin={this.state.appLogin} />
+              </td>
+            </tr>
+            <tr>
+              <td><b>Username:</b></td>
               <td>{this.state.username}</td>
             </tr>
             <tr>
+              <td><b>Email Address:</b></td>
               <td>{this.state.email}</td>
             </tr>
             <tr>
+              <td><b>About Me:</b></td>
               <td>{this.state.about}</td>
             </tr>
             {/*<tr>
@@ -162,20 +156,18 @@ export default class ShowSingleUser extends Component {
               </td>
             </tr>*/}
             <tr>
-              <td>
+              <td colspan='2' style={{textAlign:"center"}}>
                 Journal Entries:
-                <ul>
-                  {jList}
-                </ul>
+                <br/>
                 <JournalUser currentUser={this.state.currentUser} baseURL={this.props.baseURL} journalUpdate={this.journalUpdate} />
+                <table style={{margin:"auto"}}>
+                  <tbody>
+                    {jList}
+                  </tbody>
+                </table>
               </td>
             </tr>
-            <tr>
-              <td>
-                <UpdateUser baseURL={this.props.baseURL} currentUser={this.state.currentUser} userUpdate={this.userUpdate} />
-                <DeleteUser baseURL={this.props.baseURL} currentUser={this.state.currentUser} appLogin={this.state.appLogin} />
-              </td>
-            </tr>
+
           </tbody>
         </table>
       </>

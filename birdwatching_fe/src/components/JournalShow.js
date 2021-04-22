@@ -50,38 +50,49 @@ export default class JournalShow extends Component {
 
       <Modal
        onClose={() => this.setState({ setOpen: false }) }
-       onOpen={() => this.setState({ setOpen: true }) }
+       onOpen={() => this.setState({ setOpen: true }, () => {
+         this.getBirds();
+       }) }
        open={this.state.setOpen}
        trigger={<a>{this.props.jEnt.title}</a>}
+       size='fullscreen'
      >
        <Modal.Header>{this.props.jEnt.title}</Modal.Header>
-       <Modal.Content image>
-       {this.state.birdlist.map((bird, ind) => (
-           <li key={ind}>
-            {bird.birdname.comName}
-           </li>
-         ))}
+       <Modal.Content >
 
-         <Modal.Description>
+         <table>
+          <tbody>
+            <tr>
+              <td valign="top">
+                <h4>Birds</h4>
+                <ul>
+                {this.state.birdlist.map((bird, ind) => (
+                    <li key={ind}>
+                     {bird.birdname.comName}
+                    </li>
+                  ))}
+                </ul>
+              </td>
+              <td valign="top">
+                <table>
+                 <tbody>
+                   <tr>
+                    <td>{this.props.jEnt.notes}</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      {this.props.jEnt.photos.map((photo, ind) => (
+                        <img key={ind} src={`${this.props.baseURL}/${photo}`} alt={photo} />
+                      ))}
+                    </td>
+                  </tr>
+                 </tbody>
+                </table>
+              </td>
+            </tr>
+           </tbody>
+          </table>
 
-           <table>
-            <tbody>
-              <tr>
-               <td>{this.props.jEnt.notes}</td>
-             </tr>
-             <tr>
-               <td>
-                 {this.props.jEnt.photos.map((photo, ind) => (
-                   <img key={ind} src={`${this.props.baseURL}/${photo}`} alt={photo} />
-                 ))}
-               </td>
-             </tr>
-            </tbody>
-           </table>
-
-
-
-         </Modal.Description>
        </Modal.Content>
        <Modal.Actions>
 

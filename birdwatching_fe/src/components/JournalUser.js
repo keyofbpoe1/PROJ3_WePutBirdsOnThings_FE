@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import BirdAPI from '../components/BirdAPI.js';
-import { Button, Header, Image, Modal } from 'semantic-ui-react'
+import { Button, Header, Image, Modal, Input, TextArea } from 'semantic-ui-react'
 import axios from 'axios';
 
 export default class JournalUser extends Component {
@@ -134,34 +134,44 @@ export default class JournalUser extends Component {
        onOpen={() => this.openJournal() }
        open={this.state.setOpen}
        trigger={<Button>Add New Entry</Button>}
+       size='fullscreen'
      >
        <Modal.Header>Add New Journal Entry</Modal.Header>
-       <Modal.Content image>
-         <BirdAPI userURL={this.props.baseURL} currentUser={this.state.currentUser} jent={this.state.datestamp} pBirds={this.state.pBirds} />
-         <Modal.Description>
-           <Header>New Journal Entry</Header>
+       <Modal.Content>
+           <table>
+            <tbody>
+              <tr>
+                <td valign="top">
+                  <BirdAPI userURL={this.props.baseURL} currentUser={this.state.currentUser} jent={this.state.datestamp} pBirds={this.state.pBirds} />
+                </td>
+                <td valign="top">
+                  <label htmlFor="title"></label>
+                  <Input type="text" id="title" name="title" onChange={this.handleChange} value1={this.state.title} placeholder="Entry Title" required />
+                  <br/>
+                  <label htmlFor="notes"></label>
+                  <TextArea id="notes" name="notes" rows="4" cols="50" onChange={this.handleChange} value1={this.state.notes} placeholder="Enter a note!" />
+                  <br/>
 
-           <label htmlFor="title"></label>
-           <input type="text" id="title" name="title" onChange={this.handleChange} value1={this.state.title} placeholder="Entry Title" required />
-           <br/>
-           <label htmlFor="notes"></label>
-           <textarea id="notes" name="notes" rows="4" cols="50" onChange={this.handleChange} value1={this.state.notes} placeholder="Enter a note!"></textarea>
-           <br/>
+                  <div>
+                   <h4>Add Images</h4>
+                    <div>
+                      <Input type="file" name="file" onChange={this.uploadHandler} accept="image/*" multiple/>
+                    </div>
+                    {this.state.photos.map((photo, ind) => (
+                      <>
+                        <img key={ind} src={`${this.props.baseURL}/${photo}`} alt={photo} />
+                        <Button key={photo} data-img={photo} type="button" onClick={this.remImg}>Remove</Button>
+                      </>
+                    ))}
+                  </div>
 
-           <div>
-            <h4>Add Images</h4>
-             <div>
-               <input type="file" name="file" onChange={this.uploadHandler} accept="image/*" multiple/>
-             </div>
-             {this.state.photos.map((photo, ind) => (
-               <>
-                 <img key={ind} src={`${this.props.baseURL}/${photo}`} alt={photo} />
-                 <button key={photo} data-img={photo} type="button" onClick={this.remImg}>Remove</button>
-               </>
-             ))}
-           </div>
+                </td>
+              </tr>
+            </tbody>
+           </table>
 
-         </Modal.Description>
+
+
        </Modal.Content>
        <Modal.Actions>
          <Button color='green' onClick={() => {

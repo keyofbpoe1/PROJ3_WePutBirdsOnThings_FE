@@ -13,27 +13,32 @@ export default class KillSession extends Component {
   handleLogout = async () => {
     //event.preventDefault();
 
-    const url = this.props.baseURL + '/Sessions/logout';
+    let confLogout = window.confirm("Are you sure you want to sign out?");
 
-     try{
-       const response = await fetch( url, {
-         method: 'GET',
-         headers: {
-           'Content-Type' : 'application/json'
-         },
-       });
+    if (confLogout) {
 
-       if (response.status===200){
-         console.log(response);
-         sessionStorage.clear();
-         this.props.appLogin();
-         //this.props.appLogin(false, null);
-         //console.log('new user created');
+      const url = this.props.baseURL + '/Sessions/logout';
+
+       try{
+         const response = await fetch( url, {
+           method: 'GET',
+           headers: {
+             'Content-Type' : 'application/json'
+           },
+         });
+
+         if (response.status===200){
+           console.log(response);
+           sessionStorage.clear();
+           this.props.appLogin();
+           //this.props.appLogin(false, null);
+           //console.log('new user created');
+         }
+
        }
-
-     }
-     catch(err){
-       console.log('Error => ', err);
+       catch(err){
+         console.log('Error => ', err);
+       }
      }
   }
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Header, Image, Modal, Menu } from 'semantic-ui-react'
+import { Button, Header, Image, Modal, Menu, Input } from 'semantic-ui-react'
 import{
   Nav, NavLink, Bars, NavMenu, NavBtn, NavBtnLink
 } from './NavBarElements'
@@ -41,7 +41,14 @@ export default class NewSession extends Component {
       });
   }
 
+  _handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      this.handleLogin();
+    }
+  }
+
   render () {
+
      return (
        <>
 
@@ -50,15 +57,17 @@ export default class NewSession extends Component {
           onOpen={() => this.setState({ setOpen: true }) }
           open={this.state.setOpen}
           trigger=<Button color='blue'>Sign In</Button>
+          size='mini'
+          onKeyDown={this._handleKeyDown}
         >
         <Modal.Header>Sign In</Modal.Header>
           <Modal.Content>
 
              <label htmlFor="username"></label>
-             <input type="text" id="username" name="username" onChange={this.handleChange} value1={this.state.username} placeholder="Enter Your Username" required />
+             <Input type="text" id="username" name="username" onChange={this.handleChange} value1={this.state.username} placeholder="Enter Your Username" required />
              <br/>
              <label htmlFor="password"></label>
-             <input type="password" id="password" name="password" onChange={this.handleChange} value1={this.state.password} placeholder="Confirm Your Password" required />
+             <Input type="password" id="password" name="password" onChange={this.handleChange} value1={this.state.password} placeholder="Confirm Your Password" required />
              <br/>
 
 
