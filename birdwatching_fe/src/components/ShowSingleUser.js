@@ -107,7 +107,7 @@ export default class ShowSingleUser extends Component {
      jList = jArr.map((journ, ind) => {
        return (
           <tr key={ind}>
-            <td>
+            <td style={{textAlign:"left"}}>
               <JournalShow currentUser={this.state.currentUser} datestamp={journ.datestamp} baseURL={this.props.baseURL} jEnt={journ} />
             </td>
             <td>
@@ -158,7 +158,7 @@ export default class ShowSingleUser extends Component {
                 <br/>
                 <JournalUser currentUser={this.state.currentUser} baseURL={this.props.baseURL} journalUpdate={this.journalUpdate} />
                 <br/><br/>
-                <table style={{margin:"auto"}}>
+                <table className="jtable" style={{margin:"auto"}}>
                   <tbody>
                     {jList}
                   </tbody>
