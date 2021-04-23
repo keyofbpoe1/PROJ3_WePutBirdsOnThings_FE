@@ -1,70 +1,56 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[![General Assembly Logo](https://camo.githubusercontent.com/1a91b05b8f4d44b5bbfb83abac2b0996d8e26c92/687474703a2f2f692e696d6775722e636f6d2f6b6538555354712e706e67)](https://generalassemb.ly/education/web-development-immersive)
 
-## Available Scripts
 
-In the project directory, you can run:
+# Project III BIRD CALL: The Everything Bird App; by Max, Kaushik, and Stephen
+#### Front End
 
-### `npm start`
+<p align="center">
+<img src="public/birdlogo.png" width="400">
+</p>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## User Story
 
-### `npm test`
+Bird Call is a webpage for Ornithology enthusiasts. If you like birds, this is where you need to be. The idea of this app is to enable birdwatchers to keep a log of their bird sightings, create journal, search for all bird sightings in a state as well as pin birds.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+On the home screen of the app users can search for the sightings of various birds in their state.
 
-### `npm run build`
+The app has a log in functionality where users can log in. Once logged in users have the ability to journal their bird sightings. They can create, update, and delete new sightings. This is designed to be an end to end journal for a bird lover.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## The Front End (FE)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+For the FE we used REACT and styled it with Semantic UI as well as more traditional CSS elements. We also used an application programming interface (API) which we discuss in the following section.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## The API
 
-### `npm run eject`
+The API for this particular website is taken from eBird which is maintained and provided by Cornell University. This allowed us to pull data from their database. These APIs allow us to gather several data points but we have chosen to get name, and location information since we thought this was most pertinent for our purposes. For further information please refer to :
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+https://confluence.cornell.edu/display/CLOISAPI/eBird-1.1-suggestions
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## The Back End (BE)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+For the backend we used Node.js and contains the CRUD routes. Some of the routes we used include
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+1. GET to show a list of all user birds
+2. PUT route to unpin birds
+3. DELETE route to destroy a journal entry
 
-## Learn More
+There are other GET routes and POST routes for the sessions as well.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Database
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+For the database to store all the data we have used MongoDB. MongoDB is a document-oriented NoSQL database used for high volume data storage. Instead of using tables and rows as in the traditional relational databases, MongoDB makes use of collections and documents. Documents consist of key-value pairs which are the basic unit of data in MongoDB. Collections contain sets of documents and function which is the equivalent of relational database tables. MongoDB is a database which came into light around the mid-2000s. For further details please refer to:
 
-### Code Splitting
+https://www.mongodb.com/what-is-mongodb
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### Analyzing the Bundle Size
+## Original Wire Frames
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+<p align='center'>
+<img src="public/wireframe1.png" width="400">  
 
-### Making a Progressive Web App
+<img src="public/wireframe2.png" width="400">
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+<img src="public/wireframe3.png" width="400">
+</p>
