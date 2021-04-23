@@ -67,3 +67,16 @@ code {
 .mainsearch h1 {
   color: #fff;
 }
+
+.conttable {
+  border-collapse: collapse;
+}
+
+.conttable td {
+  padding: 10px;
+  border-right: 1px solid #fff;
+}
+
+.conttable td:last-of-type {
+  border-right: none;
+}

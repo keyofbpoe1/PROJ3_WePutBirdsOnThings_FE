@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
 import { Button, Modal, Input, TextArea, Icon, Menu } from 'semantic-ui-react'
-import{
-  NavLink
-} from './NavBarElements'
 import Axios from "axios";
 
 export default class NewUser2 extends Component {

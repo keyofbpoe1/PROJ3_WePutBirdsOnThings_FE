@@ -18,20 +18,17 @@ import BirdsHeader from './components/BirdsHeader.js'
 
 import { BrowserRouter as Router } from 'react-router-dom';
 import {
-  Checkbox,
   Grid,
-  Header,
   Icon,
   Image,
   Menu,
   Segment,
   Sidebar,
-  Button,
 
 } from 'semantic-ui-react'
 
 import{
-  Nav, NavLink, Bars, NavMenu, NavBtn, NavBtnLink
+  Nav, NavLink, Bars, NavMenu, NavBtn,
 } from './components/NavBarElements'
 
 let baseURL = process.env.REACT_APP_BASEURL;
