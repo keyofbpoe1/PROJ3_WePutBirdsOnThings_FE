@@ -12,6 +12,10 @@ code {
     monospace;
 }
 
+.bigbut {
+  font-size: 20pt;
+}
+
 .centdiv {
   margin: auto;
   width: fit-content;

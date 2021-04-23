@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import NewSession from '../components/NewSession.js';
 import KillSession from '../components/KillSession.js';
+//import Sidebar from '../Sidebar';
+//import '../Sidebar.css';
 import {
   Image
 } from 'semantic-ui-react'
