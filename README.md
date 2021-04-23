@@ -1,8 +1,9 @@
 
 # Project III BIRD CALL: The Everything Bird App; by Max, Kaushik, and Stephen
 
-<img src="public/birdlogo.png" width="200">
-
+<p align="center">
+<img src="public/birdlogo.png" width="400">
+</p>
 ## User Story
 
 Bird Call is a webpage for Ornithology enthusiasts. If you like birds, this is where you need to be. The idea of this app is to enable birdwatchers to keep a log of their bird sightings, create journal, search for all bird sightings in a state as well as pin birds.
