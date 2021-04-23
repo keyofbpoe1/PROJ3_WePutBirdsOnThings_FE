@@ -1,9 +1,14 @@
 
+[![General Assembly Logo](https://camo.githubusercontent.com/1a91b05b8f4d44b5bbfb83abac2b0996d8e26c92/687474703a2f2f692e696d6775722e636f6d2f6b6538555354712e706e67)](https://generalassemb.ly/education/web-development-immersive)
+
+
 # Project III BIRD CALL: The Everything Bird App; by Max, Kaushik, and Stephen
 
 <p align="center">
 <img src="public/birdlogo.png" width="400">
 </p>
+
+
 ## User Story
 
 Bird Call is a webpage for Ornithology enthusiasts. If you like birds, this is where you need to be. The idea of this app is to enable birdwatchers to keep a log of their bird sightings, create journal, search for all bird sightings in a state as well as pin birds.
@@ -41,8 +46,10 @@ https://www.mongodb.com/what-is-mongodb
 
 ## Original Wire Frames
 
+<p align='center'>
 <img src="public/wireframe1.png" width="400">  
 
 <img src="public/wireframe2.png" width="400">
 
 <img src="public/wireframe3.png" width="400">
+</p>
