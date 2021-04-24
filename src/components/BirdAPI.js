@@ -1,5 +1,5 @@
 import React, { Component} from 'react'
-import { Button, Input, Select, Item } from 'semantic-ui-react'
+import { Button, Input, Select, Item, Icon } from 'semantic-ui-react'
 import axios from 'axios'
 // import BirdData from './components/BirdData'
 // sd1dnat8ktfu
@@ -248,10 +248,12 @@ export default class BirdAPI extends Component {
           placeholder="Search..."
           title="Search for a Bird Name"
         ></Input>
-        <Input
+        <Button
           type='submit'
-          value='&#128269;'>
-        </Input>
+          style={{backgroundColor:'#fff', padding:'10px', paddingRight:'5px'}}
+          >
+          <Icon name='search' />
+        </Button>
       </form>
       {birdlist}
       <br/><br/>
